@@ -1,14 +1,15 @@
 // @flow
 
-import * as React from "react";
-import PopOver from "../_generic/PopOvers/PopOver";
-import MobilePopOverButton from "../_generic/PopOvers/MobilePopOverButton";
-import MobilePopOver from "../_generic/PopOvers/MobilePopOver";
-import PopOverWrapper from "../_generic/PopOvers/PopOverWrapper";
-import PopOverGroup from "../_generic/PopOvers/PopOverGroup";
-import HeaderTitle from "./HeaderTitle";
-import HeaderPopOverContent from "./HeaderPopOverContent";
-import HorizontalLayout from "../_generic/horizontal-layout";
+import * as React from 'react'
+import PopOver from '../_generic/PopOvers/PopOver'
+import MobilePopOverButton from '../_generic/PopOvers/MobilePopOverButton'
+import MobilePopOver from '../_generic/PopOvers/MobilePopOver'
+import PopOverWrapper from '../_generic/PopOvers/PopOverWrapper'
+import PopOverGroup from '../_generic/PopOvers/PopOverGroup'
+import HeaderTitle from './HeaderTitle'
+import HeaderPopOverContent from './HeaderPopOverContent'
+import HorizontalLayout from '../_generic/horizontal-layout'
+import MobileHeaderPopOverContent from './MobileHeaderPopOverContent'
 
 const AppHeader = () => {
   return (
@@ -18,21 +19,21 @@ const AppHeader = () => {
       <MobilePopOverButton />
 
       <HorizontalLayout
-        horizontalPosition={"between"}
-        verticalPosition={"center"}
-        mobileHidden={"hidden"}
-        sizeToDisplay={"md:"}
+        horizontalPosition={'between'}
+        verticalPosition={'center'}
+        mobileHidden={'hidden'}
+        sizeToDisplay={'md:'}
       >
         <PopOverGroup>
-          <PopOver title={"React"} children={<HeaderPopOverContent />} />
-          <PopOver title={"Laravel"} children={<HeaderPopOverContent />} />
+          <PopOver title={'React'} children={<HeaderPopOverContent />} />
+          <PopOver title={'Laravel'} children={<HeaderPopOverContent />} />
         </PopOverGroup>
         {/*<LoginContainer />*/}
       </HorizontalLayout>
 
-      <MobilePopOver />
+      <MobilePopOver children={<MobileHeaderPopOverContent />} />
     </PopOverWrapper>
-  );
-};
+  )
+}
 
-export default AppHeader;
+export default AppHeader
