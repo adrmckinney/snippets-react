@@ -1,5 +1,9 @@
 # Dependencies
 
+## API
+
+- Axios: `npm i axios`
+
 ## CSS / Styling
 
 - [Tailwindcss](https://tailwindcss.com/docs/guides/create-react-app)
@@ -21,6 +25,10 @@
             require('@tailwindcss/aspect-ratio'),
       ]
 ```
+
+- [React-Syntax-Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
+  - `npm install react-syntax-highlighter --save`
+  - May have to install this: `npm install prismjs`
 
 ## Icons
 

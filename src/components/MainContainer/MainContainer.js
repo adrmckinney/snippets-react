@@ -1,5 +1,7 @@
 import * as React from 'react'
+import HorizontalLayout from '../_generic/horizontal-layout'
 import ThreeColWrapper from '../_generic/three-col-wrapper'
+import SnippetContainer from './SnippetContainer/SnippetContainer'
 import ListCards from './SnippetsList/list-cards'
 
 const MainContainer = () => {
@@ -7,7 +9,11 @@ const MainContainer = () => {
     <>
       <ThreeColWrapper
         leftColContent={<ListCards title={'Snippets'} />}
-        centerColContent={<p>This is the center</p>}
+        centerColContent={
+          <SnippetContainer>
+            <HorizontalLayout />
+          </SnippetContainer>
+        }
         rightColContent={<p>This is the right</p>}
         constrainedWidth={false}
         contrainedHeight={true}

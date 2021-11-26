@@ -31,7 +31,7 @@ const ThreeColWrapper = ({
             <div className='h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0'>
               {/* Start left column area */}
               <div
-                className='h-full relative'
+                className='h-full relative overflow-scroll'
                 style={contrainedHeight ? { minHeight: '12rem' } : styles.containerHeight}
               >
                 <div className='absolute inset-0'>{leftColContent}</div>
