@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import Button from '../../_generic/Button'
 import Input from '../../_generic/input'
 import SelectDropdown from '../../_generic/select-dropdown'
 
@@ -25,6 +26,7 @@ const DetailInputsContainer = () => {
         <Input label={'Author'} />
         <SelectDropdown label={'Language'} data={data} />
         <Input label={'Style'} />
+        <Button title={'Submit'} buttonStatus={'primary'} buttonSize={'small'} type={'submit'} />
       </span>
     </>
   )

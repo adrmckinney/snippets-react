@@ -3,9 +3,11 @@
 import * as React from 'react'
 import { useState } from 'react'
 import ConditionalRender from '../_generic/conditional-render'
+import Form from '../_generic/Form'
 import HorizontalLayout from '../_generic/horizontal-layout'
 import ThreeColWrapper from '../_generic/three-col-wrapper'
 import SnippetContainer from './SnippetContainer/SnippetContainer'
+import CodeInputContainer from './SnippetEditor/CodeInputContainer'
 import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
 import ListCards from './SnippetsList/list-cards'
 
@@ -30,13 +32,15 @@ const MainContainer = () => {
           />
         }
       >
-        <ThreeColWrapper
-          leftColContent={<DetailInputsContainer />}
-          centerColContent={'text area to write code'}
-          rightColContent={'highlighted code for real time render'}
-          constrainedWidth={false}
-          constrainedHeight
-        />
+        <Form>
+          <ThreeColWrapper
+            leftColContent={<DetailInputsContainer />}
+            centerColContent={<CodeInputContainer />}
+            rightColContent={'highlighted code for real time render'}
+            constrainedWidth={false}
+            constrainedHeight
+          />
+        </Form>
       </ConditionalRender>
     </>
   )

@@ -29,7 +29,11 @@ const SelectDropdown = ({ label, data, initialValue }: Props) => {
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className='block text-sm font-medium text-gray-700'>{label}</Listbox.Label>
+          <Listbox.Label
+            className={`block text-sm font-medium text-${inputTheme.normal.labelText}`}
+          >
+            {label}
+          </Listbox.Label>
           <div className='mt-1 relative'>
             <Listbox.Button
               className={`

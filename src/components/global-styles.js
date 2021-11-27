@@ -57,6 +57,7 @@ export const inputTheme = {
     placeholder: 'gray-300',
     focusRing: colorThemes.primary.focusRing,
     focusBorder: colorThemes.primary.focusRing,
+    labelText: 'gray-700',
   },
   error: {
     text: 'red-900',
