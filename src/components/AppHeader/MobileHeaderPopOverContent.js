@@ -110,7 +110,7 @@ const MobileHeaderPopOverContent = ({ title }: Props) => {
           <div className='mt-6'>
             <Button
               type={'button'}
-              buttonLabel={'Sign up'}
+              title={'Sign up'}
               buttonSize={'medium'}
               buttonStatus={'primary'}
               icon={'edit'}

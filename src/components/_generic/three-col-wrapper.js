@@ -7,7 +7,10 @@ type Props = {
   centerColContent: React.Node,
   rightColContent: React.Node,
   constrainedWidth?: boolean,
-  contrainedHeight?: boolean,
+  constrainedHeight?: boolean,
+  leftColStyle?: object,
+  centerColStyle?: object,
+  rightColStyle?: object,
 }
 
 const ThreeColWrapper = ({
@@ -15,7 +18,10 @@ const ThreeColWrapper = ({
   centerColContent,
   rightColContent,
   constrainedWidth = true,
-  contrainedHeight = true,
+  constrainedHeight = true,
+  leftColStyle,
+  centerColStyle,
+  rightColStyle,
 }: Props) => {
   return (
     <>
@@ -32,7 +38,7 @@ const ThreeColWrapper = ({
               {/* Start left column area */}
               <div
                 className='h-full relative overflow-scroll'
-                style={contrainedHeight ? { minHeight: '12rem' } : styles.containerHeight}
+                style={constrainedHeight ? { minHeight: '12rem' } : styles.containerHeight}
               >
                 <div className='absolute inset-0'>{leftColContent}</div>
               </div>
@@ -45,7 +51,7 @@ const ThreeColWrapper = ({
               {/* Start main area*/}
               <div
                 className='relative h-full'
-                style={contrainedHeight ? { minHeight: '36rem' } : styles.containerHeight}
+                style={constrainedHeight ? { minHeight: '36rem' } : styles.containerHeight}
               >
                 <div className='absolute inset-0'>{centerColContent}</div>
               </div>
@@ -59,7 +65,7 @@ const ThreeColWrapper = ({
             {/* Start right column area */}
             <div
               className='h-full relative'
-              style={contrainedHeight ? { minHeight: '16rem' } : styles.containerHeight}
+              style={constrainedHeight ? { minHeight: '16rem' } : styles.containerHeight}
             >
               <div className='absolute inset-0'>{rightColContent}</div>
             </div>

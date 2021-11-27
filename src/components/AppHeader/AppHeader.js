@@ -10,6 +10,7 @@ import HeaderTitle from './HeaderTitle'
 import HeaderPopOverContent from './HeaderPopOverContent'
 import HorizontalLayout from '../_generic/horizontal-layout'
 import MobileHeaderPopOverContent from './MobileHeaderPopOverContent'
+import Button from '../_generic/Button'
 
 const AppHeader = () => {
   return (
@@ -28,7 +29,14 @@ const AppHeader = () => {
           <PopOver title={'React'} children={<HeaderPopOverContent />} />
           <PopOver title={'Laravel'} children={<HeaderPopOverContent />} />
         </PopOverGroup>
-        {/*<LoginContainer />*/}
+        <Button
+          title={'New Snippet'}
+          buttonSize={'small'}
+          buttonStatus={'primary'}
+          type={'button'}
+          icon={'edit'}
+        />
+        {/* <LoginContainer /> */}
       </HorizontalLayout>
 
       <MobilePopOver children={<MobileHeaderPopOverContent />} />

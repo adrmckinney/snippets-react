@@ -2,6 +2,7 @@ import { CheckIcon } from '@heroicons/react/solid'
 import { MailSolid } from '@graywolfai/react-heroicons'
 import { MailOutline } from '@graywolfai/react-heroicons'
 import { RefreshIcon, PencilAltIcon, TrashIcon, XIcon } from '@heroicons/react/outline'
+import { buttonTheme } from '../global-styles'
 // import { Link } from 'react-router-dom'
 
 const SIZES = {
@@ -20,31 +21,10 @@ const LABEL_POSITION = {
   right: 'justify-end',
 }
 
-const colorScheme = {
-  primary: {
-    bgColor: 'indigo-600',
-    hoverBgColor: 'indigo-700',
-    focus: 'indigo-500',
-    text: 'white',
-  },
-  secondary: {
-    bgColor: 'indigo-100',
-    hoverBgColor: 'indigo-200',
-    focus: 'indigo-500',
-    text: 'indigo-700',
-  },
-  cancel: {
-    bgColor: 'white',
-    hoverBgColor: 'bg-gray-50',
-    focus: 'indigo-500',
-    text: 'gray-700',
-  },
-}
-
 const STATUSES = {
-  primary: `bg-${colorScheme.primary.bgColor} hover:bg-${colorScheme.primary.hoverBgColor} text-${colorScheme.primary.text} border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colorScheme.primary.focus}`,
-  secondary: `bg-${colorScheme.secondary.bgColor} hover:bg-${colorScheme.secondary.hoverBgColor} text-${colorScheme.secondary.text} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colorScheme.secondary.focus}`,
-  cancel: `bg-${colorScheme.cancel.bgColor} hover:bg-${colorScheme.cancel.hoverBgColor} text-${colorScheme.cancel.text} border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colorScheme.cancel.focus}`,
+  primary: `bg-${buttonTheme.primary.bgColor} hover:bg-${buttonTheme.primary.hoverBgColor} text-${buttonTheme.primary.text} border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.primary.focus}`,
+  secondary: `bg-${buttonTheme.secondary.bgColor} hover:bg-${buttonTheme.secondary.hoverBgColor} text-${buttonTheme.secondary.text} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.secondary.focus}`,
+  cancel: `bg-${buttonTheme.cancel.bgColor} hover:bg-${buttonTheme.cancel.hoverBgColor} text-${buttonTheme.cancel.text} border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.cancel.focus}`,
   CTA: 'text-snow bg-forestGreen hover:bg-russianGreen border border-transparent',
   text: 'block text-gray-700 hover:bg-gray-100',
   mobileHamburger:
@@ -61,7 +41,7 @@ const ICON_SIZES = {
 
 const Button = ({
   type,
-  buttonLabel,
+  title,
   buttonSize,
   buttonStatus,
   disabled,
@@ -151,7 +131,7 @@ const Button = ({
   //                 `}
   //       >
   //         {ICONS[icon]}
-  //         {buttonLabel}
+  //         {title}
   //       </Link>
   //     )
   //   }
@@ -175,7 +155,7 @@ const Button = ({
         `}
     >
       {ICONS[icon]}
-      {buttonLabel}
+      {title}
       {children}
     </button>
   )

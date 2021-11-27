@@ -18,7 +18,7 @@ const SnippetContainer = ({ children }: Props) => {
   useEffect(() => {
     getSnippet().then(data => setSnippet(data?.snippet))
   }, [])
-
+  console.log('snippet', snippet)
   console.log('snippet?.snippet', snippet?.snippet)
 
   const string = renderToStaticMarkup(<ResponsiveGridLayout />)
@@ -28,11 +28,12 @@ const SnippetContainer = ({ children }: Props) => {
         language='javascript'
         style={dracula}
         showLineNumbers
-        wrapLongLines
-        useInLieStyles={false}
+        wrapLines
+        // wrapLongLines
         className='min-h-full'
       >
-        {snippet?.snippet}
+        {/* {snippet?.snippet} */}
+        'hello'
       </SyntaxHighlighter>
     </>
   )
