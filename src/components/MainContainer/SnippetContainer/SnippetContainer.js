@@ -3,37 +3,37 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { renderToString, renderToStaticMarkup } from 'react-dom/server'
-import HorizontalLayout from '../../_generic/horizontal-layout'
-import ResponsiveGridLayout from '../../_generic/ResponsiveGridLayout'
+import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { getSnippet } from '../../../api/get-snippet'
+import SelectDropdown from '../../_generic/select-dropdown'
 
-type Props = {
-  children: React.Node,
-}
+const SnippetContainer = () => {
+  const [snippetData, setSnippetData] = useState('')
+  const [theme, setTheme] = useState(snippetData?.theme)
 
-const SnippetContainer = ({ children }: Props) => {
-  const [snippet, setSnippet] = useState('')
   useEffect(() => {
-    getSnippet().then(data => setSnippet(data?.snippet))
+    getSnippet().then(data => setSnippetData(data?.snippet))
   }, [])
-  console.log('snippet', snippet)
-  console.log('snippet?.snippet', snippet?.snippet)
 
-  const string = renderToStaticMarkup(<ResponsiveGridLayout />)
+  const defaultTheme = `${snippetData?.theme || Object.keys(themes).sort()[0]}`
+
   return (
     <>
+      <SelectDropdown
+        label={'Theme'}
+        data={Object.keys(themes)}
+        value={theme || defaultTheme}
+        selected={defaultTheme}
+        onChange={e => setTheme(e)}
+      />
       <SyntaxHighlighter
-        language='javascript'
-        style={dracula}
+        language={snippetData?.language}
+        style={themes[theme || defaultTheme]}
         showLineNumbers
         wrapLines
-        // wrapLongLines
         className='min-h-full'
       >
-        {/* {snippet?.snippet} */}
-        'hello'
+        {snippetData?.snippet || ''}
       </SyntaxHighlighter>
     </>
   )

@@ -1,7 +1,15 @@
 import { CheckIcon } from '@heroicons/react/solid'
 import { MailSolid } from '@graywolfai/react-heroicons'
 import { MailOutline } from '@graywolfai/react-heroicons'
-import { RefreshIcon, PencilAltIcon, TrashIcon, XIcon } from '@heroicons/react/outline'
+import {
+  RefreshIcon,
+  PencilAltIcon,
+  TrashIcon,
+  XIcon,
+  ReplyIcon,
+  CodeIcon,
+  TerminalIcon,
+} from '@heroicons/react/outline'
 import { buttonTheme } from '../global-styles'
 // import { Link } from 'react-router-dom'
 
@@ -62,49 +70,70 @@ const Button = ({
   const ICONS = {
     mailOutline: (
       <MailOutline
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     mailSolid: (
       <MailSolid
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     refresh: (
       <RefreshIcon
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center animate-spin transform rotate-180`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center animate-spin transform rotate-180`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     edit: (
       <PencilAltIcon
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     delete: (
       <TrashIcon
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     xicon: (
       <XIcon
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     check: (
       <CheckIcon
-        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-4 self-center`}
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
+        style={overrideIconStyle}
+        aria-hidden='true'
+      />
+    ),
+    reply: (
+      <ReplyIcon
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
+        style={overrideIconStyle}
+        aria-hidden='true'
+      />
+    ),
+    code: (
+      <CodeIcon
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
+        style={overrideIconStyle}
+        aria-hidden='true'
+      />
+    ),
+    terminal: (
+      <TerminalIcon
+        className={`${ICON_SIZES[buttonSize]} ${customIconStyle} mr-2 self-center`}
         style={overrideIconStyle}
         aria-hidden='true'
       />

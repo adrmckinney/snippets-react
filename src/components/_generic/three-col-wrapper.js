@@ -11,6 +11,7 @@ type Props = {
   leftColStyle?: object,
   centerColStyle?: object,
   rightColStyle?: object,
+  centerRightDominant?: Boolean,
 }
 
 const ThreeColWrapper = ({
@@ -22,6 +23,7 @@ const ThreeColWrapper = ({
   leftColStyle,
   centerColStyle,
   rightColStyle,
+  centerRightDominant = false,
 }: Props) => {
   return (
     <>
@@ -47,10 +49,11 @@ const ThreeColWrapper = ({
           </div>
 
           <div className='bg-white lg:min-w-0 lg:flex-1'>
+            {/* <div className='bg-white lg:min-w-0 lg:w-80'> */}
             <div className='h-full py-6 px-4 sm:px-6 lg:px-8'>
               {/* Start main area*/}
               <div
-                className='relative h-full'
+                className='relative h-full overflow-scroll'
                 style={constrainedHeight ? { minHeight: '36rem' } : styles.containerHeight}
               >
                 <div className='absolute inset-0'>{centerColContent}</div>
@@ -61,10 +64,12 @@ const ThreeColWrapper = ({
         </div>
 
         <div className='bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0'>
-          <div className='h-full pl-6 py-6 lg:w-80'>
+          <div
+            className={`${centerRightDominant ? 'lg:w-128 xl:w-192' : 'lg:w-80'} h-full pl-6 py-6`}
+          >
             {/* Start right column area */}
             <div
-              className='h-full relative'
+              className='h-full relative overflow-scroll'
               style={constrainedHeight ? { minHeight: '16rem' } : styles.containerHeight}
             >
               <div className='absolute inset-0'>{rightColContent}</div>

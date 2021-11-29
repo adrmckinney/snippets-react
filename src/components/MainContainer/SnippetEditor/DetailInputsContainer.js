@@ -5,27 +5,44 @@ import Button from '../../_generic/Button'
 import Input from '../../_generic/input'
 import SelectDropdown from '../../_generic/select-dropdown'
 
-const data = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
-  { id: 7, name: 'Caroline Schultz' },
-  { id: 8, name: 'Mason Heaney' },
-  { id: 9, name: 'Claudie Smitham' },
-  { id: 10, name: 'Emil Schaefer' },
-]
+type Props = {
+  handleChange: () => {},
+  languages: Array,
+  themes: Array,
+  input: Object,
+}
 
-const DetailInputsContainer = () => {
+const DetailInputsContainer = ({ handleChange, languages, themes, input }: Props) => {
+  console.log('input?.theme', input?.theme)
   return (
     <>
       <span className='space-y-4'>
-        <Input label={'Title'} />
-        <Input label={'Author'} />
-        <SelectDropdown label={'Language'} data={data} />
-        <Input label={'Style'} />
+        <Input
+          label={'Title'}
+          name={'title'}
+          value={input?.title}
+          onChange={e => handleChange(e.target.name, e.target.value)}
+        />
+        <Input
+          label={'Author'}
+          name={'author'}
+          value={input?.author}
+          onChange={e => handleChange(e.target.name, e.target.value)}
+        />
+        <SelectDropdown
+          label={'Language'}
+          data={Object.keys(languages)}
+          value={input?.language}
+          selected={input?.language}
+          onChange={e => handleChange('language', e)}
+        />
+        <SelectDropdown
+          label={'Theme'}
+          data={Object.keys(themes)}
+          value={input?.theme}
+          selected={input?.theme}
+          onChange={e => handleChange('theme', e)}
+        />
         <Button title={'Submit'} buttonStatus={'primary'} buttonSize={'small'} type={'submit'} />
       </span>
     </>

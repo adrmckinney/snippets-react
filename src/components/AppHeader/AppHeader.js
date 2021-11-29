@@ -12,7 +12,12 @@ import HorizontalLayout from '../_generic/horizontal-layout'
 import MobileHeaderPopOverContent from './MobileHeaderPopOverContent'
 import Button from '../_generic/Button'
 
-const AppHeader = () => {
+type Props = {
+  setShowEditor: () => {},
+  showEditor: Boolean,
+}
+
+const AppHeader = ({ setShowEditor, showEditor }: Props) => {
   return (
     <PopOverWrapper>
       <HeaderTitle />
@@ -30,11 +35,12 @@ const AppHeader = () => {
           <PopOver title={'Laravel'} children={<HeaderPopOverContent />} />
         </PopOverGroup>
         <Button
-          title={'New Snippet'}
+          title={showEditor ? 'View Snippets' : 'New Snippet'}
           buttonSize={'small'}
           buttonStatus={'primary'}
           type={'button'}
-          icon={'edit'}
+          icon={showEditor ? 'terminal' : 'code'}
+          onClick={() => setShowEditor(!showEditor)}
         />
         {/* <LoginContainer /> */}
       </HorizontalLayout>

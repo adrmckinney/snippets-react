@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { buttonTheme, inputTheme, colorThemes } from '../global-styles'
@@ -17,16 +17,17 @@ type Props = {
   label?: String,
   data: Object,
   initialValue?: String,
+  value?: String,
   icon?: String,
   inputStyles?: Object,
   labelStyles?: Object,
+  selected: String,
+  onChange: () => {},
 }
 
-const SelectDropdown = ({ label, data, initialValue }: Props) => {
-  const [selected, setSelected] = useState(data[3])
-
+const SelectDropdown = ({ label, data, initialValue, value = '', onChange, selected }: Props) => {
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
         <>
           <Listbox.Label
@@ -44,7 +45,7 @@ const SelectDropdown = ({ label, data, initialValue }: Props) => {
                 focus:border-${buttonTheme.primary.focusBorder} 
                 sm:text-sm relative w-full rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1`}
             >
-              <span className='block truncate'>{selected.name}</span>
+              <span className='block truncate'>{value}</span>
               <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                 <SelectorIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
               </span>
@@ -61,9 +62,9 @@ const SelectDropdown = ({ label, data, initialValue }: Props) => {
                 className={`
                 bg-${inputTheme.normal.bgColor} absolute z-10 mt-1 w-full shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm`}
               >
-                {data.map(item => (
+                {data.map((item, idx) => (
                   <Listbox.Option
-                    key={item.id}
+                    key={idx}
                     className={({ active }) =>
                       classNames(
                         active
@@ -82,7 +83,7 @@ const SelectDropdown = ({ label, data, initialValue }: Props) => {
                             'block truncate'
                           )}
                         >
-                          {item.name}
+                          {item}
                         </span>
 
                         {selected ? (
