@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { getSnippet } from '../../../api/get-snippet'
+import HorizontalLayout from '../../_generic/horizontal-layout'
 import SelectDropdown from '../../_generic/select-dropdown'
 
 const SnippetContainer = () => {
@@ -19,8 +20,10 @@ const SnippetContainer = () => {
 
   return (
     <>
+      {/* <HorizontalLayout> */}
       <SelectDropdown
         label={'Theme'}
+        width={'40'}
         data={Object.keys(themes)}
         value={theme || defaultTheme}
         selected={defaultTheme}
@@ -35,6 +38,7 @@ const SnippetContainer = () => {
       >
         {snippetData?.snippet || ''}
       </SyntaxHighlighter>
+      {/* </HorizontalLayout> */}
     </>
   )
 }
