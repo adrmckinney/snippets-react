@@ -1,9 +1,9 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 
 type Props = {
-  children: React.Node,
+  children: Node,
   handleSubmit: () => {},
 }
 

@@ -1,27 +1,25 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 import { useState } from 'react'
 import ConditionalRender from '../_generic/conditional-render'
 import Form from '../_generic/Form'
-import ThreeColWrapper from '../_generic/three-col-wrapper'
 import SnippetContainer from './SnippetContainer/SnippetContainer'
 import CodeInputContainer from './SnippetEditor/CodeInputContainer'
-import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
-import ListCards from './SnippetsList/list-cards'
 import * as languages from 'react-syntax-highlighter/dist/esm/languages/hljs'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import Highlighter from './SnippetEditor/highlighter'
 import { createSnippet } from '../../api/create-snippet'
+import TwoColWrapper from '../_generic/two-col-wrapper'
+import { useEditorState } from '../NewHeader/withEditorState'
+import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
+import TwoRowWrapper from '../_generic/two-row-wrapper'
 
 const defaultLanguage = `${'javascript' || Object.keys(languages).sort()[0]}`
 const defaultTheme = `${'dracula' || Object.keys(themes).sort()[0]}`
 
-type Props = {
-  showEditor: Boolean,
-}
-console.log('languages', languages)
-const MainContainer = ({ showEditor }: Props) => {
+const MainContainer = () => {
+  const { editorState: isEditing } = useEditorState()
   const [input, setInput] = useState({
     language: defaultLanguage,
     theme: defaultTheme,
@@ -52,38 +50,38 @@ const MainContainer = ({ showEditor }: Props) => {
   return (
     <>
       <ConditionalRender
-        condition={showEditor}
+        condition={isEditing}
         falseRender={
-          <ThreeColWrapper
-            leftColContent={<ListCards title={'Snippets'} />}
-            centerColContent={<SnippetContainer />}
+          <TwoColWrapper
+            leftColContent={<SnippetContainer />}
             rightColContent={<p>This is the description area</p>}
-            constrainedWidth={false}
-            constrainedHeight={true}
           />
         }
       >
         <Form handleSubmit={handleSubmit}>
-          <ThreeColWrapper
-            leftColContent={
-              <DetailInputsContainer
-                handleChange={handleChange}
-                languages={languages}
-                themes={themes}
-                input={input}
-              />
-            }
-            centerColContent={<CodeInputContainer handleChange={handleChange} input={input} />}
+          <TwoColWrapper
+            wrapperClassNames={'h-full'}
+            rightClassNames={'h-full'}
+            leftColContent={<CodeInputContainer handleChange={handleChange} input={input} />}
             rightColContent={
-              <Highlighter
-                language={input?.language}
-                theme={themes[input?.theme]}
-                snippet={input?.snippet}
+              <TwoRowWrapper
+                topSectionContent={
+                  <DetailInputsContainer
+                    handleChange={handleChange}
+                    languages={languages}
+                    themes={themes}
+                    input={input}
+                  />
+                }
+                bottomSectionContent={
+                  <Highlighter
+                    language={input?.language}
+                    theme={themes[input?.theme]}
+                    snippet={input?.snippet}
+                  />
+                }
               />
             }
-            constrainedWidth={false}
-            constrainedHeight={false}
-            centerRightDominant
           />
         </Form>
       </ConditionalRender>

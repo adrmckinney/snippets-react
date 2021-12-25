@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 import { useState } from 'react'
 import Button from '../../_generic/Button'
 import ConditionalRender from '../../_generic/conditional-render'
@@ -23,7 +23,7 @@ const CodeInputContainer = ({ handleChange, input }: Props) => {
             textArea
             name={'snippet'}
             label={'Code'}
-            rows='40'
+            rows='30'
             value={input?.snippet}
             onChange={e => handleChange(e.target.name, e.target.value)}
             onKeyDown={() => {}}
@@ -44,7 +44,7 @@ const CodeInputContainer = ({ handleChange, input }: Props) => {
           textArea
           name={'description'}
           label={'Description'}
-          rows='40'
+          rows='30'
           value={input?.description}
           onChange={e => handleChange(e.target.name, e.target.value)}
           labelRight={

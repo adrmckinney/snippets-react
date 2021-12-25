@@ -6,6 +6,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { buttonTheme, inputTheme, colorThemes } from '../global-styles'
 import HorizontalLayout from './horizontal-layout'
+import ConditionalRender from './conditional-render'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -16,6 +17,7 @@ type Props = {
   theme?: String,
   hiddenLabel?: Boolean,
   label?: String,
+  hasLabel?: Boolean,
   data: Object,
   initialValue?: String,
   value?: String,
@@ -25,27 +27,36 @@ type Props = {
   selected: String,
   width?: String,
   onChange: () => {},
+  wrapperClassNames?: String,
+  selectorBtnClassNames?: String,
 }
 
 const SelectDropdown = ({
   label,
+  hasLabel = true,
   data,
   initialValue,
   value = '',
   onChange,
   selected,
   width = 'full',
+  wrapperClassNames,
+  selectorBtnClassNames,
 }: Props) => {
   return (
-    <Listbox value={selected} onChange={onChange} className='bg-red-500'>
+    <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
         <>
-          <HorizontalLayout additionalClassName={'w-full justify-end space-x-2 p-2'}>
-            <Listbox.Label
-              className={`block text-sm font-medium text-${inputTheme.normal.labelText}`}
-            >
-              {label}
-            </Listbox.Label>
+          <HorizontalLayout
+            additionalClassName={`w-full justify-end space-x-2 p-2 ${wrapperClassNames}`}
+          >
+            <ConditionalRender condition={hasLabel}>
+              <Listbox.Label
+                className={`block text-sm font-medium text-${inputTheme.normal.labelText}`}
+              >
+                {label}
+              </Listbox.Label>
+            </ConditionalRender>
             <div className='mt-1 relative'>
               <Listbox.Button
                 className={`
@@ -55,7 +66,8 @@ const SelectDropdown = ({
                 border-${inputTheme.normal.borderWidth} 
                 focus:ring-${buttonTheme.primary.focus} 
                 focus:border-${buttonTheme.primary.focusBorder} 
-                sm:text-sm relative rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1`}
+                sm:text-sm relative rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1
+                ${selectorBtnClassNames}`}
               >
                 <span className='block truncate'>{value}</span>
                 <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
