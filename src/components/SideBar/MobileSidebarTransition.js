@@ -1,19 +1,25 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useEditorState } from '../NewHeader/withEditorState'
 
-const MobileSidebarTransition = ({
-  mobileMenuOpen,
-  setMobileMenuOpen,
-  children,
-  closeModalButton,
-}) => {
+type Props = {
+  children: Node,
+  closeModalButton: Node,
+}
+
+const MobileSidebarTransition = ({ children, closeModalButton }: Props) => {
+  const { editorState, dispatch } = useEditorState()
   return (
     <>
-      <Transition.Root show={mobileMenuOpen} as={Fragment}>
-        <Dialog as='div' className='md:hidden' onClose={setMobileMenuOpen}>
+      <Transition.Root show={editorState?.isSidebarModal} as={Fragment}>
+        <Dialog
+          as='div'
+          className='md:hidden'
+          onClose={() => dispatch({ type: 'is-sidebar-modal', payload: false })}
+        >
           <div className='fixed inset-0 z-40 flex'>
             <Transition.Child
               as={Fragment}

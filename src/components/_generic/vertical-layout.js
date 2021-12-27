@@ -11,6 +11,7 @@ type Props = {
   sizeToDisplay?: string,
   additionalClassName?: String,
   styles?: Object,
+  onClick?: () => {},
 }
 
 const VerticalLayout = ({
@@ -22,8 +23,10 @@ const VerticalLayout = ({
   sizeToDisplay = '',
   additionalClassName = '',
   styles = {},
+  onClick,
 }: Props) => (
   <CustomTag
+    onClick={onClick}
     className={`
     ${mobileHidden} 
     ${sizeToDisplay}flex-1 

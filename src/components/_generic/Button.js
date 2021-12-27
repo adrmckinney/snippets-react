@@ -37,6 +37,7 @@ const STATUSES = {
   text: 'block text-gray-700 hover:bg-gray-100',
   mobileHamburger:
     'bg-mediumPurple inline-flex items-center text-indigo-200 hover:text-white hover:bg-darkerPurple hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-darkerPurple focus:ring-white',
+  icon: 'bg-transparent',
   null: '',
 }
 

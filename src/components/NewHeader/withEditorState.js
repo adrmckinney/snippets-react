@@ -1,25 +1,33 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
+import useEditorStateReducer from './useEditorStateReducer'
 
 const EditorStateContext = createContext()
-const EditorSetContext = createContext()
+const EditorDispatchContext = createContext()
 
 export const useEditorState = () => {
   const editorState = useContext(EditorStateContext)
-  const setEditorState = useContext(EditorSetContext)
+  const dispatch = useContext(EditorDispatchContext)
 
-  return { editorState, setEditorState }
+  return { editorState, dispatch }
+}
+
+const initialValues = {
+  isEditing: false,
+  isDescription: false,
+  isSidebarModal: false,
+  isDeletingModal: false,
 }
 
 export const withEditorState =
   Component =>
   ({ ...rest }) => {
-    const [editorState, setEditorState] = useState(false)
+    const [editorState, dispatch] = useEditorStateReducer(initialValues)
 
     return (
       <EditorStateContext.Provider value={editorState}>
-        <EditorSetContext.Provider value={setEditorState}>
+        <EditorDispatchContext.Provider value={dispatch}>
           <Component {...rest} />
-        </EditorSetContext.Provider>
+        </EditorDispatchContext.Provider>
       </EditorStateContext.Provider>
     )
   }

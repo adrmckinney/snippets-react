@@ -1,9 +1,9 @@
 import { apiUrl } from './routes'
 
-export function getSnippet(pk) {
+export function getSnippets(token) {
   return apiUrl
     .get(
-      `edit-snippet/${pk}/`
+      `snippets`
       // {
       //   headers: {
       //     Authorization: `Token ${token}`,

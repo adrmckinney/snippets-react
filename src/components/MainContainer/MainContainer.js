@@ -19,7 +19,7 @@ const defaultLanguage = `${'javascript' || Object.keys(languages).sort()[0]}`
 const defaultTheme = `${'dracula' || Object.keys(themes).sort()[0]}`
 
 const MainContainer = () => {
-  const { editorState: isEditing } = useEditorState()
+  const { editorState } = useEditorState()
   const [input, setInput] = useState({
     language: defaultLanguage,
     theme: defaultTheme,
@@ -50,7 +50,7 @@ const MainContainer = () => {
   return (
     <>
       <ConditionalRender
-        condition={isEditing}
+        condition={editorState.isEditing}
         falseRender={
           <TwoColWrapper
             leftColContent={<SnippetContainer />}

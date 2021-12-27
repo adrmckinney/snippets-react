@@ -1,17 +1,31 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getSnippet } from '../../api/get-snippet'
 
 const SnippetStateContext = createContext()
 const SnippetDispatchContext = createContext()
 
 export const useSnippetState = () => {
   const snippetState = useContext(SnippetStateContext)
-  const setSnippetState = useContext(SnippetDispatchContext)
+  const setSnippetId = useContext(SnippetDispatchContext)
 
-  return { snippetState, setSnippetState }
+  return { snippetState, setSnippetId }
 }
 
 export const withSnippetState =
   Component =>
   ({ ...rest }) => {
-    const [snippetState, setSnippetState] = useState({})
+    const [snippetId, setSnippetId] = useState({})
+    const [snippetState, setSnippetState] = useState(snippetId)
+
+    useEffect(() => {
+      getSnippet(snippetId).then(data => setSnippetState(data.snippet))
+    }, [snippetId, setSnippetId])
+
+    return (
+      <SnippetStateContext.Provider value={snippetState}>
+        <SnippetDispatchContext.Provider value={setSnippetId}>
+          <Component {...rest} />
+        </SnippetDispatchContext.Provider>
+      </SnippetStateContext.Provider>
+    )
   }
