@@ -12,10 +12,15 @@ export const useEditorState = () => {
 }
 
 const initialValues = {
+  isCreating: false,
   isEditing: false,
   isDescription: false,
-  isSidebarModal: false,
-  isDeletingModal: false,
+  isSidebarOverlay: false,
+  isDeletingModal: {
+    isOpen: false,
+    id: null,
+    title: '',
+  },
 }
 
 export const withEditorState =

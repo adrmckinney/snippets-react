@@ -1,28 +1,23 @@
 // @flow
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Fragment } from 'react'
 import MobileTransition from './MobileSidebarTransition'
 import MobileSidebar from './MobileSidebarContent'
 import Button from '../_generic/Button'
 import VerticalLayout from '../_generic/vertical-layout'
-import { getSnippets } from '../../api/get-snippets'
 import { useSnippetState } from '../MainContainer/withSnippetState'
 import { useEditorState } from '../NewHeader/withEditorState'
 import HorizontalLayout from '../_generic/horizontal-layout'
+import DeleteSnippetAlert from '../_generic/Alerts/delete-snippet-alert'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const SideBar = ({ sideBarWidth }) => {
-  const { setSnippetId } = useSnippetState()
+  const { setSnippetId, snippetsListState: snippets } = useSnippetState()
   const { dispatch } = useEditorState()
-  const [snippets, setSnippets] = useState({})
-
-  useEffect(() => {
-    getSnippets()?.then(data => setSnippets(data?.snippets))
-  }, [])
 
   const width = {
     skinny: '28',
@@ -31,6 +26,7 @@ const SideBar = ({ sideBarWidth }) => {
 
   return (
     <>
+      <DeleteSnippetAlert />
       <div className={`hidden w-${width[sideBarWidth]} bg-indigo-700 overflow-y-auto md:block`}>
         <div className='w-full py-6 flex flex-col items-center'>
           <div className='flex-shrink-0 flex items-center'>
@@ -64,7 +60,12 @@ const SideBar = ({ sideBarWidth }) => {
                       buttonSize={'extraSmall'}
                       buttonStatus={'icon'}
                       type={'button'}
-                      onClick={() => dispatch({ type: 'is-deleting-modal', payload: true })}
+                      onClick={() =>
+                        dispatch({
+                          type: 'is-deleting-modal',
+                          payload: { isOpen: true, id: snippet?.id, title: snippet?.title },
+                        })
+                      }
                     />
                   </HorizontalLayout>
                 </VerticalLayout>
@@ -89,7 +90,7 @@ const SideBar = ({ sideBarWidth }) => {
             overrideButtonStyle={{
               backgroundColor: 'transparent',
             }}
-            onClick={() => dispatch({ type: 'is-sidebar-modal', payload: false })}
+            onClick={() => dispatch({ type: 'is-sidebar-overlay', payload: false })}
           />
         }
       >

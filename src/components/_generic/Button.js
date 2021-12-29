@@ -68,6 +68,7 @@ const Button = ({
   ariaExpanded,
   ariaHaspopup,
   srOnly,
+  ref,
 }) => {
   const ICONS = {
     mailOutline: (
@@ -184,6 +185,7 @@ const Button = ({
   return (
     <button
       type={type}
+      ref={ref}
       disabled={disabled ?? false}
       onClick={onClick}
       style={overrideButtonStyle}

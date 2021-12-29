@@ -14,11 +14,11 @@ const MobileSidebarTransition = ({ children, closeModalButton }: Props) => {
   const { editorState, dispatch } = useEditorState()
   return (
     <>
-      <Transition.Root show={editorState?.isSidebarModal} as={Fragment}>
+      <Transition.Root show={editorState?.isSidebarOverlay} as={Fragment}>
         <Dialog
           as='div'
           className='md:hidden'
-          onClose={() => dispatch({ type: 'is-sidebar-modal', payload: false })}
+          onClose={() => dispatch({ type: 'is-sidebar-overlay', payload: false })}
         >
           <div className='fixed inset-0 z-40 flex'>
             <Transition.Child

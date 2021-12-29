@@ -28,11 +28,11 @@ const Header = () => {
             overrideButtonStyle={{
               backgroundColor: 'transparent',
             }}
-            onClick={() => dispatch({ type: 'is-sidebar-modal', payload: true })}
+            onClick={() => dispatch({ type: 'is-sidebar-overlay', payload: true })}
           />
           <div className='flex-1 flex justify-between px-4 sm:px-6'>
             <div className='flex-1 flex'>
-              <ConditionalRender condition={!editorState.isEditing}>
+              <ConditionalRender condition={!editorState.isCreating || !editorState.isEditing}>
                 <Search />
               </ConditionalRender>
             </div>

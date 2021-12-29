@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import ConditionalRender from '../_generic/conditional-render'
 import Form from '../_generic/Form'
@@ -14,30 +14,35 @@ import TwoColWrapper from '../_generic/two-col-wrapper'
 import { useEditorState } from '../NewHeader/withEditorState'
 import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
 import TwoRowWrapper from '../_generic/two-row-wrapper'
+import { useSnippetState } from './withSnippetState'
 
 const defaultLanguage = `${'javascript' || Object.keys(languages).sort()[0]}`
 const defaultTheme = `${'dracula' || Object.keys(themes).sort()[0]}`
 
 const MainContainer = () => {
-  const { editorState } = useEditorState()
+  const { editorState, dispatch } = useEditorState()
+  const { invalidateSnippetsList, snippetState } = useSnippetState()
   const [input, setInput] = useState({
     language: defaultLanguage,
     theme: defaultTheme,
   })
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    createSnippet(input).then(data =>
+  useEffect(() => {
+    if (!!snippetState) {
       setInput(input => ({
         ...input,
-        author: '',
-        title: '',
-        snippet: '',
-        description: '',
-        language: defaultLanguage,
-        theme: defaultTheme,
+        ...snippetState,
       }))
-    )
+    }
+  }, [snippetState])
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    createSnippet(input).then(data => {
+      invalidateSnippetsList()
+      dispatch({ type: 'is-creating', payload: false })
+      setInput({})
+    })
   }
 
   const handleChange = (name, value) => {
@@ -50,7 +55,7 @@ const MainContainer = () => {
   return (
     <>
       <ConditionalRender
-        condition={editorState.isEditing}
+        condition={editorState.isCreating || editorState.isEditing}
         falseRender={
           <TwoColWrapper
             leftColContent={<SnippetContainer />}
