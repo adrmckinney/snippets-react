@@ -1,13 +1,12 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import ConditionalRender from './conditional-render'
 import { MailIcon } from '@heroicons/react/solid'
 import { inputTheme } from '../global-styles'
 
 type Props = {
-  children?: React.Node,
   validation?: Boolean,
   placeholder?: String,
   type: String,
@@ -29,7 +28,6 @@ type Props = {
 }
 
 const Input = ({
-  children,
   validation = false,
   placeholder = '',
   type = '',
@@ -85,7 +83,6 @@ const Input = ({
                 rows={rows}
                 name={name}
                 id={id}
-                // defaultValue={defaultValue}
                 value={value}
                 style={{ ...inputStyles }}
                 onChange={onChange}
@@ -137,7 +134,6 @@ const Input = ({
             name={name}
             id={id}
             placeholder={placeholder}
-            // defaultValue={defaultValue}
             value={value}
             aria-invalid={validation.toString()}
             aria-describedby={`${name}-${inputTheme[theme]['error']}`}

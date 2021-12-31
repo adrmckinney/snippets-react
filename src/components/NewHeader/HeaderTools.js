@@ -6,7 +6,7 @@ import { useEditorState } from './withEditorState'
 const HeaderTools = () => {
   const { editorState, dispatch } = useEditorState()
   const { snippetState } = useSnippetState()
-  console.log('editorState', editorState)
+
   return (
     <>
       <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>

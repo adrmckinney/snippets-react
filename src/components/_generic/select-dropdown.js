@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
@@ -13,7 +13,6 @@ function classNames(...classes) {
 }
 
 type Props = {
-  children?: React.Node,
   theme?: String,
   hiddenLabel?: Boolean,
   label?: String,

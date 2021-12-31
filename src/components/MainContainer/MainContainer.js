@@ -1,7 +1,6 @@
 // @flow
 
 import React, { useEffect } from 'react'
-import { useState } from 'react'
 import ConditionalRender from '../_generic/conditional-render'
 import Form from '../_generic/Form'
 import SnippetContainer from './SnippetContainer/SnippetContainer'
@@ -15,21 +14,18 @@ import { useEditorState } from '../NewHeader/withEditorState'
 import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
 import TwoRowWrapper from '../_generic/two-row-wrapper'
 import { useSnippetState } from './withSnippetState'
-
-const defaultLanguage = `${'javascript' || Object.keys(languages).sort()[0]}`
-const defaultTheme = `${'dracula' || Object.keys(themes).sort()[0]}`
+import { updateSnippet } from '../../api/update-snippet'
+import DescriptionContainer from './Description Container/DescriptionContainer'
+import { useInputChangeState, withInputChangeState } from './withInputChangeState'
 
 const MainContainer = () => {
   const { editorState, dispatch } = useEditorState()
   const { invalidateSnippetsList, snippetState } = useSnippetState()
-  const [input, setInput] = useState({
-    language: defaultLanguage,
-    theme: defaultTheme,
-  })
+  const { inputState: input, setInputState } = useInputChangeState()
 
   useEffect(() => {
     if (!!snippetState) {
-      setInput(input => ({
+      setInputState(input => ({
         ...input,
         ...snippetState,
       }))
@@ -38,18 +34,19 @@ const MainContainer = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    createSnippet(input).then(data => {
-      invalidateSnippetsList()
-      dispatch({ type: 'is-creating', payload: false })
-      setInput({})
-    })
-  }
-
-  const handleChange = (name, value) => {
-    setInput(input => ({
-      ...input,
-      [name]: value,
-    }))
+    if (editorState?.isEditing) {
+      updateSnippet(input, snippetState?.id).then(data => {
+        invalidateSnippetsList()
+        dispatch({ type: 'is-editing', payload: false })
+        setInputState({})
+      })
+    } else {
+      createSnippet(input).then(data => {
+        invalidateSnippetsList()
+        dispatch({ type: 'is-creating', payload: false })
+        setInputState({})
+      })
+    }
   }
 
   return (
@@ -59,7 +56,7 @@ const MainContainer = () => {
         falseRender={
           <TwoColWrapper
             leftColContent={<SnippetContainer />}
-            rightColContent={<p>This is the description area</p>}
+            rightColContent={<DescriptionContainer />}
           />
         }
       >
@@ -67,17 +64,10 @@ const MainContainer = () => {
           <TwoColWrapper
             wrapperClassNames={'h-full'}
             rightClassNames={'h-full'}
-            leftColContent={<CodeInputContainer handleChange={handleChange} input={input} />}
+            leftColContent={<CodeInputContainer />}
             rightColContent={
               <TwoRowWrapper
-                topSectionContent={
-                  <DetailInputsContainer
-                    handleChange={handleChange}
-                    languages={languages}
-                    themes={themes}
-                    input={input}
-                  />
-                }
+                topSectionContent={<DetailInputsContainer languages={languages} themes={themes} />}
                 bottomSectionContent={
                   <Highlighter
                     language={input?.language}
@@ -94,4 +84,4 @@ const MainContainer = () => {
   )
 }
 
-export default MainContainer
+export default withInputChangeState(MainContainer)

@@ -1,9 +1,10 @@
 import { apiUrl } from './routes'
 
-export function deleteSnippet(id) {
+export function updateSnippet(input, id) {
   return apiUrl
-    .delete(
-      `delete-snippet/${id}/`
+    .put(
+      `update-snippet/${id}/`,
+      input
       // {
       //   headers: {
       //     Authorization: `Token ${token}`,

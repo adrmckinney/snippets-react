@@ -4,14 +4,12 @@ import React from 'react'
 import { useEditorState } from '../../NewHeader/withEditorState'
 import ConditionalRender from '../../_generic/conditional-render'
 import Input from '../../_generic/input'
+import DescriptionEditor from '../Description Container/DescriptionEditor'
+import { useInputChangeState } from '../withInputChangeState'
 
-type Props = {
-  handleChange: () => {},
-  input: Object,
-}
-
-const CodeInputContainer = ({ handleChange, input }: Props) => {
+const CodeInputContainer = () => {
   const { editorState } = useEditorState()
+  const { handleChange, inputState: input } = useInputChangeState()
 
   return (
     <>
@@ -29,14 +27,7 @@ const CodeInputContainer = ({ handleChange, input }: Props) => {
           />
         }
       >
-        <Input
-          textArea
-          name={'description'}
-          label={'Description'}
-          rows='30'
-          value={input?.description}
-          onChange={e => handleChange(e.target.name, e.target.value)}
-        />
+        <DescriptionEditor />
       </ConditionalRender>
     </>
   )

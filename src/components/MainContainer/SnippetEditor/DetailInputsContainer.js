@@ -1,10 +1,12 @@
 // @flow
 
 import * as React from 'react'
+import { useEditorState } from '../../NewHeader/withEditorState'
 import Button from '../../_generic/Button'
 import HorizontalLayout from '../../_generic/horizontal-layout'
 import Input from '../../_generic/input'
 import SelectDropdown from '../../_generic/select-dropdown'
+import { useInputChangeState } from '../withInputChangeState'
 
 type Props = {
   handleChange: () => {},
@@ -13,7 +15,10 @@ type Props = {
   input: Object,
 }
 
-const DetailInputsContainer = ({ handleChange, languages, themes, input }: Props) => {
+const DetailInputsContainer = ({ languages, themes }: Props) => {
+  const { editorState } = useEditorState()
+  const { handleChange, inputState: input } = useInputChangeState()
+
   return (
     <>
       <span className='space-y-4'>
@@ -49,7 +54,12 @@ const DetailInputsContainer = ({ handleChange, languages, themes, input }: Props
             onChange={e => handleChange('theme', e)}
           />
         </HorizontalLayout>
-        <Button title={'Submit'} buttonStatus={'primary'} buttonSize={'small'} type={'submit'} />
+        <Button
+          title={editorState?.isEditing ? 'Update' : 'Create'}
+          buttonStatus={'primary'}
+          buttonSize={'small'}
+          type={'submit'}
+        />
       </span>
     </>
   )
