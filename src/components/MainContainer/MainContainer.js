@@ -24,26 +24,26 @@ const MainContainer = () => {
   const { inputState: input, setInputState } = useInputChangeState()
 
   useEffect(() => {
-    if (!!snippetState) {
+    if (snippetState?.isEditing) {
       setInputState(input => ({
         ...input,
         ...snippetState,
       }))
     }
-  }, [snippetState])
+  }, [snippetState, setInputState])
 
   const handleSubmit = event => {
     event.preventDefault()
     if (editorState?.isEditing) {
       updateSnippet(input, snippetState?.id).then(data => {
         invalidateSnippetsList()
-        dispatch({ type: 'is-editing', payload: false })
+        dispatch({ type: 'reset' })
         setInputState({})
       })
     } else {
       createSnippet(input).then(data => {
         invalidateSnippetsList()
-        dispatch({ type: 'is-creating', payload: false })
+        dispatch({ type: 'reset' })
         setInputState({})
       })
     }

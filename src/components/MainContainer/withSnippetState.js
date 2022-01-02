@@ -22,6 +22,7 @@ export const withSnippetState =
     const [snippetId, setSnippetId] = useState({})
     const [snippetState, setSnippetState] = useState(snippetId)
     const [snippetsListState, setSnippetsListState] = useState({})
+    console.log('snippetState', snippetState)
 
     useEffect(() => {
       getSnippet(snippetId).then(data => setSnippetState(data.snippet))

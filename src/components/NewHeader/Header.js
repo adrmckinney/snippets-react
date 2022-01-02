@@ -12,7 +12,7 @@ const Header = () => {
   const { editorState, dispatch } = useEditorState()
   return (
     <>
-      <header className='w-full sticky top-0'>
+      <header className='w-full sticky top-0 z-50'>
         <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex'>
           <Button
             buttonSize={'small'}

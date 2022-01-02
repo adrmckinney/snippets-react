@@ -11,7 +11,7 @@ const App = () => {
     <div className='h-full flex'>
       <SideBar sideBarWidth={'regular'} />
 
-      <VerticalLayout additionalClassName={'overflow-hidden'}>
+      <VerticalLayout verticalPosition='start' additionalClassName={'h-full overflow-hidden'}>
         <Header />
         <MainContainer />
       </VerticalLayout>

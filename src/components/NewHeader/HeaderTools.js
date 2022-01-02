@@ -6,39 +6,41 @@ import { useEditorState } from './withEditorState'
 const HeaderTools = () => {
   const { editorState, dispatch } = useEditorState()
   const { snippetState } = useSnippetState()
-
+  console.log('editorState', editorState)
   return (
     <>
-      <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>
+      <ConditionalRender condition={editorState?.isCreating || editorState?.isEditing}>
         <Button
-          title={editorState.isDescription ? 'Code Editor' : 'Write Desciption'}
+          title={editorState?.isDescription ? 'Code Editor' : 'Write Desciption'}
           type={'button'}
           buttonSize={'small'}
           buttonStatus={'primary'}
           icon={'reply'}
-          onClick={() => dispatch({ type: 'is-description', payload: !editorState.isDescription })}
+          onClick={() => dispatch({ type: 'is-description', payload: !editorState?.isDescription })}
         />
       </ConditionalRender>
 
       <ConditionalRender condition={!!snippetState}>
         <Button
-          title={editorState.isEditing ? 'Cancel' : 'Edit Snippet'}
+          title={editorState?.isEditing ? 'Cancel' : 'Edit Snippet'}
           buttonSize={'small'}
           buttonStatus={'primary'}
           type={'button'}
           icon={'pencil'}
-          onClick={() => dispatch({ type: 'is-editing', payload: !editorState.isEditing })}
+          onClick={() => dispatch({ type: 'is-editing', payload: !editorState?.isEditing })}
         />
       </ConditionalRender>
 
       <ConditionalRender condition={!editorState.isEditing}>
         <Button
-          title={editorState.isCreating ? 'View Snippets' : 'New Snippet'}
+          title={editorState?.isCreating ? 'View Snippets' : 'New Snippet'}
           buttonSize={'small'}
           buttonStatus={'primary'}
           type={'button'}
-          icon={editorState.isCreating ? 'terminal' : 'code'}
-          onClick={() => dispatch({ type: 'is-creating', payload: !editorState.isCreating })}
+          icon={editorState?.isCreating ? 'terminal' : 'code'}
+          onClick={() => {
+            dispatch({ type: 'is-creating', payload: !editorState?.isCreating })
+          }}
         />
       </ConditionalRender>
     </>
