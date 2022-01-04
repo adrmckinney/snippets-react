@@ -9,10 +9,8 @@ import SelectDropdown from '../../_generic/select-dropdown'
 import { useInputChangeState } from '../withInputChangeState'
 
 type Props = {
-  handleChange: () => {},
   languages: Array,
   themes: Array,
-  input: Object,
 }
 
 const DetailInputsContainer = ({ languages, themes }: Props) => {
@@ -25,6 +23,7 @@ const DetailInputsContainer = ({ languages, themes }: Props) => {
         <Input
           label={'Title'}
           name={'title'}
+          placeholder={'Title'}
           value={input?.title}
           onChange={e => handleChange(e.target.name, e.target.value)}
         />

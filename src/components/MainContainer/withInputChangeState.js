@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
-import * as languages from 'react-syntax-highlighter/dist/esm/languages/hljs'
-import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
+import * as themes from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 const InputStateContext = createContext()
 const SetInputStateContext = createContext()

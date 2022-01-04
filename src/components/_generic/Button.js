@@ -1,6 +1,6 @@
-import { CheckIcon, MenuAlt2Icon, PlusSmIcon } from '@heroicons/react/solid'
-import { MailSolid } from '@graywolfai/react-heroicons'
-import { MailOutline } from '@graywolfai/react-heroicons'
+import { CheckIcon, MenuAlt2Icon, PlusSmIcon, MailIcon } from '@heroicons/react/solid'
+import { MailIcon as MailOutline } from '@heroicons/react/outline'
+
 import {
   RefreshIcon,
   PencilAltIcon,
@@ -79,7 +79,7 @@ const Button = ({
       />
     ),
     mailSolid: (
-      <MailSolid
+      <MailIcon
         className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
