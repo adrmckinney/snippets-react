@@ -36,8 +36,8 @@ const AppHeader = ({ setShowEditor, showEditor }: Props) => {
         </PopOverGroup>
         <Button
           title={showEditor ? 'View Snippets' : 'New Snippet'}
-          buttonSize={'small'}
-          buttonStatus={'primary'}
+          size={'small'}
+          status={'primary'}
           type={'button'}
           icon={showEditor ? 'terminal' : 'code'}
           onClick={() => setShowEditor(!showEditor)}

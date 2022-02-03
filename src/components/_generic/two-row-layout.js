@@ -16,7 +16,7 @@ type Props = {
   wrapperClassNames?: String,
 }
 
-const TwoRowWrapper = ({
+const TwoRowLayout = ({
   topSectionContent,
   bottomSectionContent,
   topSrOnlyTitle,
@@ -66,4 +66,4 @@ const TwoRowWrapper = ({
   )
 }
 
-export default TwoRowWrapper
+export default TwoRowLayout

@@ -93,8 +93,8 @@ const DeleteSnippetAlert = () => {
                 </button>
                 <Button
                   type={'button'}
-                  buttonStatus={'cancel'}
-                  buttonSize={'small'}
+                  status={'cancel'}
+                  size={'small'}
                   onClick={handleClose}
                   title={'Cancel'}
                 />

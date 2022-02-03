@@ -9,10 +9,10 @@ import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
 import * as themes from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import Highlighter from './SnippetEditor/highlighter'
 import { createSnippet } from '../../api/create-snippet'
-import TwoColWrapper from '../_generic/two-col-wrapper'
+import TwoColLayout from '../_generic/two-col-layout'
 import { useEditorState } from '../NewHeader/withEditorState'
 import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
-import TwoRowWrapper from '../_generic/two-row-wrapper'
+import TwoRowLayout from '../_generic/two-row-layout'
 import { useSnippetState } from './withSnippetState'
 import { updateSnippet } from '../../api/update-snippet'
 import DescriptionContainer from './Description Container/DescriptionContainer'
@@ -54,19 +54,19 @@ const MainContainer = () => {
       <ConditionalRender
         condition={editorState.isCreating || editorState.isEditing}
         falseRender={
-          <TwoColWrapper
+          <TwoColLayout
             leftColContent={<SnippetContainer />}
             rightColContent={<DescriptionContainer />}
           />
         }
       >
         <Form handleSubmit={handleSubmit}>
-          <TwoColWrapper
+          <TwoColLayout
             wrapperClassNames={'h-full'}
             rightClassNames={'h-full'}
             leftColContent={<CodeInputContainer />}
             rightColContent={
-              <TwoRowWrapper
+              <TwoRowLayout
                 topSectionContent={<DetailInputsContainer languages={languages} themes={themes} />}
                 bottomSectionContent={
                   <Highlighter

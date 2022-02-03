@@ -13,8 +13,8 @@ const HeaderTools = () => {
         <Button
           title={editorState?.isDescription ? 'Code Editor' : 'Write Desciption'}
           type={'button'}
-          buttonSize={'small'}
-          buttonStatus={'primary'}
+          size={'small'}
+          status={'primary'}
           icon={'reply'}
           onClick={() => dispatch({ type: 'is-description', payload: !editorState?.isDescription })}
         />
@@ -23,8 +23,8 @@ const HeaderTools = () => {
       <ConditionalRender condition={!!snippetState}>
         <Button
           title={editorState?.isEditing ? 'Cancel' : 'Edit Snippet'}
-          buttonSize={'small'}
-          buttonStatus={'primary'}
+          size={'small'}
+          status={'primary'}
           type={'button'}
           icon={'pencil'}
           onClick={() => dispatch({ type: 'is-editing', payload: !editorState?.isEditing })}
@@ -34,8 +34,8 @@ const HeaderTools = () => {
       <ConditionalRender condition={!editorState.isEditing}>
         <Button
           title={editorState?.isCreating ? 'View Snippets' : 'New Snippet'}
-          buttonSize={'small'}
-          buttonStatus={'primary'}
+          size={'small'}
+          status={'primary'}
           type={'button'}
           icon={editorState?.isCreating ? 'terminal' : 'code'}
           onClick={() => {

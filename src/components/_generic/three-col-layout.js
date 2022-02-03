@@ -14,7 +14,7 @@ type Props = {
   centerRightDominant?: Boolean,
 }
 
-const ThreeColWrapper = ({
+const ThreeColLayout = ({
   leftColContent,
   centerColContent,
   rightColContent,
@@ -82,7 +82,7 @@ const ThreeColWrapper = ({
   )
 }
 
-export default ThreeColWrapper
+export default ThreeColLayout
 
 const styles = {
   containerHeight: {

@@ -17,7 +17,7 @@ const PropInputs = ({ addPropRow }: Props) => {
         verticalPosition='center'
         additionalClassName={'p-4 justify-evenly'}
       >
-        <Button buttonStatus={'icon'} buttonSize={'small'} icon={'plusSm'} onClick={addPropRow} />
+        <Button status={'icon'} size={'small'} icon={'plusSm'} onClick={addPropRow} />
         <Input
           label={'Prop Name'}
           name={'prop_name'}

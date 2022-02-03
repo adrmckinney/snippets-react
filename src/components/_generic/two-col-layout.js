@@ -14,7 +14,7 @@ type Props = {
   wrapperClassNames?: String,
 }
 
-const TwoColWrapper = ({
+const TwoColLayout = ({
   leftColContent,
   rightColContent,
   leftSrOnlyTitle,
@@ -23,6 +23,7 @@ const TwoColWrapper = ({
   rightClassNames,
   rightStyles,
   wrapperClassNames,
+  columnDistribution,
 }: Props) => {
   return (
     <>
@@ -41,7 +42,7 @@ const TwoColWrapper = ({
 
         {/* Right Section */}
         <section
-          className={`hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block ${rightClassNames}`}
+          className={`hidden flex-1 w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block ${rightClassNames}`}
           style={{ ...rightStyles }}
         >
           {rightColContent}
@@ -51,4 +52,4 @@ const TwoColWrapper = ({
   )
 }
 
-export default TwoColWrapper
+export default TwoColLayout

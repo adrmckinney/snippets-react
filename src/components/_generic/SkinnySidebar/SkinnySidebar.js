@@ -73,8 +73,8 @@ const SkinnySideBar = () => {
         setMobileMenuOpen={setMobileMenuOpen}
         closeModalButton={
           <Button
-            buttonSize={'small'}
-            buttonStatus={'primary'}
+            size={'small'}
+            status={'primary'}
             type={'button'}
             icon={'xicon'}
             srOnly={'Close sidebar'}

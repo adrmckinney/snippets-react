@@ -94,8 +94,8 @@ const MobileHeaderPopOverContent = ({ title }: Props) => {
             <Button
               type={'button'}
               title={'Sign up'}
-              buttonSize={'medium'}
-              buttonStatus={'primary'}
+              size={'medium'}
+              status={'primary'}
               icon={'edit'}
               customButtonStyle={'w-full'}
             />

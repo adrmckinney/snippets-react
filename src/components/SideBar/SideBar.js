@@ -10,6 +10,9 @@ import { useSnippetState } from '../MainContainer/withSnippetState'
 import { useEditorState } from '../NewHeader/withEditorState'
 import HorizontalLayout from '../_generic/horizontal-layout'
 import DeleteSnippetAlert from '../_generic/Alerts/delete-snippet-alert'
+import ConditionalRender from '../_generic/conditional-render'
+import Search from '../_generic/search'
+import PaddedLayout from '../_generic/padded-layout'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -17,7 +20,7 @@ function classNames(...classes) {
 
 const SideBar = ({ sideBarWidth }) => {
   const { setSnippetId, snippetsListState: snippets } = useSnippetState()
-  const { dispatch } = useEditorState()
+  const { dispatch, editorState } = useEditorState()
 
   const width = {
     skinny: '28',
@@ -32,6 +35,11 @@ const SideBar = ({ sideBarWidth }) => {
           <div className='flex-shrink-0 flex items-center'>
             <h3>Snippets</h3>
           </div>
+          <ConditionalRender condition={!editorState.isCreating || !editorState.isEditing}>
+            <PaddedLayout>
+              <Search />
+            </PaddedLayout>
+          </ConditionalRender>
           <div className='flex-1 mt-6 w-full px-2 space-y-1'>
             {!!snippets[0]?.id &&
               snippets?.map(snippet => (
@@ -51,14 +59,14 @@ const SideBar = ({ sideBarWidth }) => {
                       className='mt-0'
                       onClick={() => setSnippetId(snippet?.id)}
                       type={'button'}
-                      buttonStatus={'icon'}
+                      status={'icon'}
                       title={snippet?.title}
                       overrideButtonStyle={{ fontSize: 14 }}
                     />
                     <Button
                       icon={'xicon'}
-                      buttonSize={'extraSmall'}
-                      buttonStatus={'icon'}
+                      size={'extraSmall'}
+                      status={'icon'}
                       type={'button'}
                       onClick={() =>
                         dispatch({
@@ -77,8 +85,8 @@ const SideBar = ({ sideBarWidth }) => {
       <MobileTransition
         closeModalButton={
           <Button
-            buttonSize={'small'}
-            buttonStatus={'primary'}
+            size={'small'}
+            status={'primary'}
             type={'button'}
             icon={'xicon'}
             srOnly={'Close sidebar'}

@@ -51,8 +51,8 @@ const ICON_SIZES = {
 const Button = ({
   type,
   title,
-  buttonSize,
-  buttonStatus,
+  size,
+  status,
   disabled,
   icon,
   onClick,
@@ -73,84 +73,84 @@ const Button = ({
   const ICONS = {
     mailOutline: (
       <MailOutline
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     mailSolid: (
       <MailIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     refresh: (
       <RefreshIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center animate-spin transform rotate-180 ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center animate-spin transform rotate-180 ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     edit: (
       <PencilAltIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     delete: (
       <TrashIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     xicon: (
       <XIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     check: (
       <CheckIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     reply: (
       <ReplyIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     code: (
       <CodeIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     terminal: (
       <TerminalIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     menu: (
       <MenuAlt2Icon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
     ),
     plusSm: (
       <PlusSmIcon
-        className={`${ICON_SIZES[buttonSize]} mr-2 self-center ${customIconStyle}`}
+        className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
         style={overrideIconStyle}
         aria-hidden='true'
       />
@@ -170,8 +170,8 @@ const Button = ({
   //         role={role}
   //         className={`
   //                     inline-flex rounded-md shadow-sm
-  //                     ${SIZES[buttonSize] ?? SIZES['medium']}
-  //                     ${STATUSES[buttonStatus] ?? STATUSES['primary']}
+  //                     ${SIZES[size] ?? SIZES['medium']}
+  //                     ${STATUSES[status] ?? STATUSES['primary']}
   //                     ${LABEL_POSITION[labelPosition] ?? LABEL_POSITION['center']}
   //                     ${customButtonStyle}
   //                 `}
@@ -195,8 +195,8 @@ const Button = ({
       aria-haspopup={ariaHaspopup}
       className={`
             inline-flex rounded-md shadow-sm
-            ${SIZES[buttonSize] ?? SIZES['medium']} 
-            ${STATUSES[buttonStatus] ?? STATUSES['primary']}
+            ${SIZES[size] ?? SIZES['medium']} 
+            ${STATUSES[status] ?? STATUSES['primary']}
             ${LABEL_POSITION[labelPosition] ?? LABEL_POSITION['center']}
             ${customButtonStyle}
         `}

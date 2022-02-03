@@ -4,6 +4,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import PaddedLayout from '../../_generic/padded-layout'
 import SelectDropdown from '../../_generic/select-dropdown'
 import { useSnippetState } from '../withSnippetState'
 
@@ -23,15 +24,17 @@ const SnippetContainer = () => {
         selected={defaultTheme}
         onChange={e => setTheme(e)}
       />
-      <SyntaxHighlighter
-        language={snippetState?.language}
-        style={themes[theme || defaultTheme]}
-        showLineNumbers
-        wrapLines
-        className='min-h-full'
-      >
-        {snippetState?.snippet || ''}
-      </SyntaxHighlighter>
+      <PaddedLayout>
+        <SyntaxHighlighter
+          language={snippetState?.language}
+          style={themes[theme || defaultTheme]}
+          showLineNumbers
+          wrapLines
+          className='min-h-full'
+        >
+          {snippetState?.snippet || ''}
+        </SyntaxHighlighter>
+      </PaddedLayout>
     </>
   )
 }
