@@ -1,5 +1,6 @@
 import './App.css'
 import MainContainer from './components/MainContainer/MainContainer'
+import { withInputChangeState } from './components/MainContainer/withInputChangeState'
 import { withSnippetState } from './components/MainContainer/withSnippetState'
 import Header from './components/NewHeader/Header'
 import { withEditorState } from './components/NewHeader/withEditorState'
@@ -19,4 +20,4 @@ const App = () => {
   )
 }
 
-export default withSnippetState(withEditorState(App))
+export default withSnippetState(withEditorState(withInputChangeState(App)))

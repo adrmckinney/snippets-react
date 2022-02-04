@@ -5,22 +5,18 @@ import ConditionalRender from '../_generic/conditional-render'
 import Form from '../_generic/Form'
 import SnippetContainer from './SnippetContainer/SnippetContainer'
 import CodeInputContainer from './SnippetEditor/CodeInputContainer'
-import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
-import * as themes from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import Highlighter from './SnippetEditor/highlighter'
 import { createSnippet } from '../../api/create-snippet'
 import TwoColLayout from '../_generic/two-col-layout'
 import { useEditorState } from '../NewHeader/withEditorState'
-import DetailInputsContainer from './SnippetEditor/DetailInputsContainer'
-import TwoRowLayout from '../_generic/two-row-layout'
 import { useSnippetState } from './withSnippetState'
 import { updateSnippet } from '../../api/update-snippet'
 import DescriptionContainer from './Description Container/DescriptionContainer'
-import { useInputChangeState, withInputChangeState } from './withInputChangeState'
+import { useInputChangeState } from './withInputChangeState'
 
 const MainContainer = () => {
   const { editorState, dispatch } = useEditorState()
-  const { invalidateSnippetsList, snippetState } = useSnippetState()
+  const { invalidateSnippetsList, snippetState, themes } = useSnippetState()
   const { inputState: input, setInputState } = useInputChangeState()
 
   useEffect(() => {
@@ -66,15 +62,10 @@ const MainContainer = () => {
             rightClassNames={'h-full'}
             leftColContent={<CodeInputContainer />}
             rightColContent={
-              <TwoRowLayout
-                topSectionContent={<DetailInputsContainer languages={languages} themes={themes} />}
-                bottomSectionContent={
-                  <Highlighter
-                    language={input?.language}
-                    theme={themes[input?.theme]}
-                    snippet={input?.snippet}
-                  />
-                }
+              <Highlighter
+                language={input?.language}
+                theme={themes[input?.theme]}
+                snippet={input?.snippet}
               />
             }
           />
@@ -84,4 +75,4 @@ const MainContainer = () => {
   )
 }
 
-export default withInputChangeState(MainContainer)
+export default MainContainer

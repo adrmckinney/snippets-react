@@ -2,14 +2,16 @@
 
 import React from 'react'
 import { Fragment } from 'react'
+import DetailInputsContainer from '../MainContainer/SnippetEditor/DetailInputsContainer'
 import Button from '../_generic/Button'
+import ConditionalRender from '../_generic/conditional-render'
 import HeaderLayout from '../_generic/header-layout'
 import HorizontalLayout from '../_generic/horizontal-layout'
 import HeaderTools from './HeaderTools'
 import { useEditorState } from './withEditorState'
 
 const Header = () => {
-  const { dispatch } = useEditorState()
+  const { dispatch, editorState } = useEditorState()
   return (
     <>
       <HeaderLayout>
@@ -32,10 +34,13 @@ const Header = () => {
 
         <HorizontalLayout horizontalPosition='between' additionalClassName='px-4 sm:px-6'>
           <HorizontalLayout
-            horizontalPosition='end'
+            horizontalPosition='start'
             additionalClassName='ml-2 space-x-4 sm:ml-6 sm:space-x-6'
           >
             <HeaderTools />
+            <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>
+              <DetailInputsContainer />
+            </ConditionalRender>
           </HorizontalLayout>
         </HorizontalLayout>
       </HeaderLayout>
