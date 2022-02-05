@@ -56,10 +56,12 @@ const MainContainer = () => {
           />
         }
       >
-        <Form handleSubmit={handleSubmit}>
+        {/* <Form handleSubmit={handleSubmit} > */}
+        <form onSubmit={handleSubmit} className='h-full'>
           <TwoColLayout
-            wrapperClassNames={'h-full'}
-            rightClassNames={'h-full'}
+            wrapperClassNames='h-full'
+            rightClassNames='h-full'
+            leftClassNames='h-full'
             leftColContent={<CodeInputContainer />}
             rightColContent={
               <Highlighter
@@ -69,7 +71,8 @@ const MainContainer = () => {
               />
             }
           />
-        </Form>
+        </form>
+        {/* </Form> */}
       </ConditionalRender>
     </>
   )

@@ -18,29 +18,26 @@ const DetailInputsContainer = () => {
   return (
     <>
       {/* <PaddedLayout> */}
-      <HorizontalLayout horizontalPosition='evenly'>
-        <div>
-          <Input
-            hasLabel={false}
-            name={'title'}
-            placeholder={'Title'}
-            value={input?.title}
-            onChange={e => handleChange(e.target.name, e.target.value)}
-          />
-        </div>
-        <div>
-          <Input
-            hasLabel={false}
-            placeholder={'Author'}
-            name={'author'}
-            value={input?.author}
-            onChange={e => handleChange(e.target.name, e.target.value)}
-          />
-        </div>
+      <HorizontalLayout horizontalPosition='evenly flex-none'>
+        <Input
+          hasLabel={false}
+          name={'title'}
+          placeholder={'Title'}
+          value={input?.title}
+          onChange={e => handleChange(e.target.name, e.target.value)}
+        />
+        <Input
+          hasLabel={false}
+          placeholder={'Author'}
+          name={'author'}
+          value={input?.author}
+          onChange={e => handleChange(e.target.name, e.target.value)}
+        />
         <SelectDropdown
           label={'Language'}
           hasLabel={false}
           data={Object.keys(languages)}
+          width='32'
           value={input?.language}
           selected={input?.language}
           wrapperClassNames={'justify-center'}
@@ -50,6 +47,7 @@ const DetailInputsContainer = () => {
           label={'Theme'}
           hasLabel={false}
           data={Object.keys(themes)}
+          width='48'
           value={input?.theme}
           selected={input?.theme}
           wrapperClassNames={'justify-center'}

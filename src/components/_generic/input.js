@@ -23,6 +23,7 @@ type Props = {
   inputStyles?: Object,
   labelStyles?: Object,
   textArea?: Boolean,
+  textAreaHeight?: String,
   rows?: Number,
   onChange: () => {},
   onKeyDown?: () => {},
@@ -44,6 +45,7 @@ const Input = ({
   inputStyles,
   labelStyles,
   textArea = false,
+  textAreaHeight = '',
   rows = 4,
   onChange,
   onKeyDown,
@@ -53,9 +55,51 @@ const Input = ({
   }
 
   return (
-    <ConditionalRender
-      condition={!textArea}
-      falseRender={
+    <>
+      <ConditionalRender
+        condition={!textArea}
+        falseRender={
+          <div className={textAreaHeight}>
+            <ConditionalRender
+              condition={!labelRight}
+              falseRender={
+                <HorizontalLayout horizontalPosition='between'>
+                  <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
+                    {label}
+                  </label>
+                  <span className='text-sm text-gray-500'>{labelRight}</span>
+                </HorizontalLayout>
+              }
+            >
+              <label
+                htmlFor={name}
+                className={`block text-sm font-medium text-${inputTheme.normal.labelText}`}
+                style={{ ...labelStyles }}
+              >
+                {label}
+              </label>
+            </ConditionalRender>
+            <div className={`mt-1 ${textAreaHeight}`}>
+              <textarea
+                rows={rows}
+                name={name}
+                id={id}
+                placeholder={placeholder}
+                value={value}
+                style={{ ...inputStyles }}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                className={`
+                    focus:ring-${inputTheme.normal.focusRing} 
+                    focus:border-${inputTheme.normal.focusBorder} 
+                    border-${inputTheme.normal.borderColor} 
+                    border-${inputTheme.normal.borderWidth} 
+                    shadow-sm block w-full sm:text-sm rounded-md px-2 h-full`}
+              />
+            </div>
+          </div>
+        }
+      >
         <div>
           <ConditionalRender
             condition={!labelRight}
@@ -70,73 +114,33 @@ const Input = ({
           >
             <label
               htmlFor={name}
-              className={`block text-sm font-medium text-${inputTheme.normal.labelText}`}
+              className={`${
+                hiddenLabel
+                  ? 'sr-only'
+                  : `block text-sm font-medium text-${inputTheme.normal.labelText}`
+              } `}
               style={{ ...labelStyles }}
             >
               {label}
             </label>
           </ConditionalRender>
-          <div className='mt-1'>
-            <textarea
-              rows={rows}
+          <div className='mt-1 relative rounded-md shadow-sm'>
+            <ConditionalRender condition={icon}>
+              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                {ICONS[icon]}
+              </div>
+            </ConditionalRender>
+            <input
+              type={type}
               name={name}
               id={id}
               placeholder={placeholder}
               value={value}
+              aria-invalid={validation.toString()}
+              aria-describedby={`${name}-${inputTheme[theme]['error']}`}
               style={{ ...inputStyles }}
               onChange={onChange}
-              onKeyDown={onKeyDown}
               className={`
-                    focus:ring-${inputTheme.normal.focusRing} 
-                    focus:border-${inputTheme.normal.focusBorder} 
-                    border-${inputTheme.normal.borderColor} 
-                    border-${inputTheme.normal.borderWidth} 
-                    shadow-sm block w-full sm:text-sm rounded-md px-2`}
-            />
-          </div>
-        </div>
-      }
-    >
-      <ConditionalRender
-        condition={!labelRight}
-        falseRender={
-          <HorizontalLayout horizontalPosition='between'>
-            <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
-              {label}
-            </label>
-            <span className='text-sm text-gray-500'>{labelRight}</span>
-          </HorizontalLayout>
-        }
-      >
-        <label
-          htmlFor={name}
-          className={`${
-            hiddenLabel
-              ? 'sr-only'
-              : `block text-sm font-medium text-${inputTheme.normal.labelText}`
-          } `}
-          style={{ ...labelStyles }}
-        >
-          {label}
-        </label>
-      </ConditionalRender>
-      <div className='mt-1 relative rounded-md shadow-sm'>
-        <ConditionalRender condition={icon}>
-          <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-            {ICONS[icon]}
-          </div>
-        </ConditionalRender>
-        <input
-          type={type}
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          value={value}
-          aria-invalid={validation.toString()}
-          aria-describedby={`${name}-${inputTheme[theme]['error']}`}
-          style={{ ...inputStyles }}
-          onChange={onChange}
-          className={`
                 ${icon ? 'pl-10' : 'pl-1 pr-10'} py-1.5 
                 border-${inputTheme[theme]['borderColor']} 
                 border-${inputTheme[theme]['borderWidth']} 
@@ -145,19 +149,21 @@ const Input = ({
                 focus:ring-${inputTheme[theme]['focusRing']} 
                 focus:border-${inputTheme[theme]['focusBorder']} 
                 block w-full sm:text-sm focus:outline-none rounded-md`}
-        />
-        <ConditionalRender condition={validation}>
-          <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-            <ExclamationCircleIcon className='h-5 w-5 text-red-500' aria-hidden='true' />
+            />
+            <ConditionalRender condition={validation}>
+              <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                <ExclamationCircleIcon className='h-5 w-5 text-red-500' aria-hidden='true' />
+              </div>
+            </ConditionalRender>
           </div>
+        </div>
+        <ConditionalRender condition={validation}>
+          <p className='mt-2 text-sm text-red-600' id={`${name}-${inputTheme[theme]['error']}`}>
+            Your password must be less than 4 characters.
+          </p>
         </ConditionalRender>
-      </div>
-      <ConditionalRender condition={validation}>
-        <p className='mt-2 text-sm text-red-600' id={`${name}-${inputTheme[theme]['error']}`}>
-          Your password must be less than 4 characters.
-        </p>
       </ConditionalRender>
-    </ConditionalRender>
+    </>
   )
 }
 

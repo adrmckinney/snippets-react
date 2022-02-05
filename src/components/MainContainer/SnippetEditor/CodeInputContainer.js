@@ -14,15 +14,15 @@ const CodeInputContainer = () => {
 
   return (
     <>
-      <PaddedLayout>
+      <PaddedLayout classNames='h-full'>
         <ConditionalRender
           condition={editorState.isDescription}
           falseRender={
             <Input
               textArea
               name={'snippet'}
-              // label={'Code'}
               placeholder={'Code'}
+              textAreaHeight='h-full'
               rows='30'
               value={input?.snippet}
               onChange={e => handleChange(e.target.name, e.target.value)}

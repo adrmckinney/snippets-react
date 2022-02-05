@@ -16,13 +16,13 @@ const SnippetContainer = () => {
 
   return (
     <>
-      <PaddedLayout>
+      <PaddedLayout classNames='h-full'>
         <SyntaxHighlighter
           language={snippetState?.language}
           style={themes[findTheme() || defaultTheme]}
           showLineNumbers
           wrapLines
-          className='min-h-full'
+          className='min-h-full rounded-md'
         >
           {snippetState?.snippet || ''}
         </SyntaxHighlighter>

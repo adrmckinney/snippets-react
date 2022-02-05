@@ -38,7 +38,7 @@ const SelectDropdown = ({
   value = '',
   onChange,
   selected,
-  width = 'full',
+  width = 'max',
   wrapperClassNames,
   selectorBtnClassNames,
 }: Props) => {
@@ -57,7 +57,7 @@ const SelectDropdown = ({
                 {label}
               </Listbox.Label>
             </ConditionalRender>
-            <div className='mt-1 relative'>
+            <div className={`mt-1 relative w-${width}`}>
               <Listbox.Button
                 className={`
                 w-${width}

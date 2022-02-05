@@ -23,7 +23,7 @@ const HeaderTools = () => {
 
       <ConditionalRender condition={editorState?.isCreating || editorState?.isEditing}>
         <Button
-          title={editorState?.isDescription ? 'Code Editor' : 'Write Desciption'}
+          title={editorState?.isDescription ? 'Code' : 'Desciption'}
           type={'button'}
           size={'extraSmall'}
           status={'primary'}
@@ -45,7 +45,7 @@ const HeaderTools = () => {
 
       <ConditionalRender condition={!editorState.isEditing}>
         <Button
-          title={editorState?.isCreating ? 'View Snippets' : 'New Snippet'}
+          title={editorState?.isCreating ? 'Cancel' : 'New Snippet'}
           size={'extraSmall'}
           status={'primary'}
           type={'button'}

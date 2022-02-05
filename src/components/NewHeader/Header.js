@@ -32,16 +32,16 @@ const Header = () => {
           onClick={() => dispatch({ type: 'is-sidebar-overlay', payload: true })}
         />
 
-        <HorizontalLayout horizontalPosition='between' additionalClassName='px-4 sm:px-6'>
-          <HorizontalLayout
-            horizontalPosition='start'
-            additionalClassName='ml-2 space-x-4 sm:ml-6 sm:space-x-6'
-          >
+        <HorizontalLayout
+          horizontalPosition='between'
+          additionalClassName='w-3/4 px-4 sm:px-2 flex-none space-x-4'
+        >
+          <HorizontalLayout horizontalPosition='start' additionalClassName='flex-none space-x-2'>
             <HeaderTools />
-            <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>
-              <DetailInputsContainer />
-            </ConditionalRender>
           </HorizontalLayout>
+          <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>
+            <DetailInputsContainer />
+          </ConditionalRender>
         </HorizontalLayout>
       </HeaderLayout>
     </>

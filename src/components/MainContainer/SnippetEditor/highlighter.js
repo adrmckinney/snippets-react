@@ -12,8 +12,13 @@ type Props = {
 
 const Highlighter = ({ snippet = '', language, theme }: Props) => {
   return (
-    <PaddedLayout>
-      <SyntaxHighlighter language={language} style={theme} customStyle={{ height: '300px' }}>
+    <PaddedLayout classNames='h-full'>
+      <SyntaxHighlighter
+        language={language}
+        style={theme}
+        customStyle={{ height: '300px' }}
+        className='min-h-full rounded-md'
+      >
         {snippet}
       </SyntaxHighlighter>
     </PaddedLayout>
