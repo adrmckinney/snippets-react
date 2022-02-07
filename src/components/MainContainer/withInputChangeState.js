@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import { useSnippetState } from './withSnippetState'
 
 const InputStateContext = createContext()
 const SetInputStateContext = createContext()

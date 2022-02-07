@@ -38,7 +38,7 @@ export const withSnippetState =
   (themes, { ...rest }) => {
     const [snippetId, setSnippetId] = useState({})
     const [snippetState, setSnippetState] = useState(snippetId)
-    const [snippetsListState, setSnippetsListState] = useState({})
+    const [snippetsListState, setSnippetsListState] = useState(null)
     const [theme, setTheme] = useState(snippetState?.theme)
     console.log('snippetState', snippetState)
 
