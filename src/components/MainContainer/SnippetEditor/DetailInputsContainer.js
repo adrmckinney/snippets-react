@@ -24,24 +24,25 @@ const DetailInputsContainer = () => {
           name={'title'}
           placeholder={'Title'}
           value={input?.title}
-          onChange={e => handleChange(e.target.name, e.target.value)}
+          onChange={e => handleChange(e.target)}
         />
         <Input
           hasLabel={false}
           placeholder={'Author'}
           name={'author'}
           value={input?.author}
-          onChange={e => handleChange(e.target.name, e.target.value)}
+          onChange={e => handleChange(e.target)}
         />
         <SelectDropdown
           label={'Language'}
+          name='language'
           hasLabel={false}
           data={Object.keys(languages)}
           width='32'
           value={input?.language}
           selected={input?.language}
           wrapperClassNames={'justify-center'}
-          onChange={e => handleChange('language', e)}
+          onChange={value => handleChange({ value, name: 'language' })}
         />
         <SelectDropdown
           label={'Theme'}
@@ -51,7 +52,7 @@ const DetailInputsContainer = () => {
           value={input?.theme}
           selected={input?.theme}
           wrapperClassNames={'justify-center'}
-          onChange={e => handleChange('theme', e)}
+          onChange={value => handleChange({ value, name: 'theme' })}
         />
         <Button
           title={editorState?.isEditing ? 'Update' : 'Create'}

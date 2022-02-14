@@ -25,7 +25,7 @@ const CodeInputContainer = () => {
               textAreaHeight='h-full'
               rows='30'
               value={input?.snippet}
-              onChange={e => handleChange(e.target.name, e.target.value)}
+              onChange={e => handleChange(e.target)}
               onKeyDown={() => {}}
             />
           }

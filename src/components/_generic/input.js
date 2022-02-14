@@ -12,6 +12,7 @@ type Props = {
   placeholder?: String,
   type: String,
   name: String,
+  dataId: Number,
   id?: String,
   theme?: String,
   hiddenLabel?: Boolean,
@@ -34,6 +35,7 @@ const Input = ({
   placeholder = '',
   type = '',
   name = '',
+  dataId = null,
   id = '',
   theme = 'normal',
   hiddenLabel = false,
@@ -133,6 +135,7 @@ const Input = ({
             <input
               type={type}
               name={name}
+              data-id={dataId}
               id={id}
               placeholder={placeholder}
               value={value}

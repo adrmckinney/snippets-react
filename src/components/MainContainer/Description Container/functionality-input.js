@@ -3,7 +3,7 @@ import Input from '../../_generic/input'
 import PaddedLayout from '../../_generic/padded-layout'
 import { useInputChangeState } from '../withInputChangeState'
 
-const Dependencies = () => {
+const FunctionalityInput = () => {
   const { handleChange, inputState: input } = useInputChangeState()
 
   return (
@@ -11,15 +11,16 @@ const Dependencies = () => {
       <PaddedLayout>
         <Input
           textArea
-          name={'dependencies'}
-          label={'Dependencies'}
-          rows='10'
-          value={input?.description?.dependencies}
-          onChange={e => handleChange(e.target.name, e.target.value, 'description')}
+          name={'functionality'}
+          label={'Functionality'}
+          id='functionality'
+          rows='15'
+          value={input?.description?.functionality?.functionality}
+          onChange={e => handleChange(e.target, 'description')}
         />
       </PaddedLayout>
     </>
   )
 }
 
-export default Dependencies
+export default FunctionalityInput

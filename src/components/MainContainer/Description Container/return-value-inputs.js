@@ -3,7 +3,7 @@ import HorizontalLayout from '../../_generic/horizontal-layout'
 import Input from '../../_generic/input'
 import { useInputChangeState } from '../withInputChangeState'
 
-const ReturnValues = () => {
+const ReturnValueInputs = () => {
   const { handleChange, inputState: input } = useInputChangeState()
   return (
     <>
@@ -15,24 +15,27 @@ const ReturnValues = () => {
         <Input
           label={'Return Name'}
           name={'return_name'}
-          value={input?.description?.return_name || ''}
-          onChange={e => handleChange(e.target.name, e.target.value, 'description')}
+          id={'return_values'}
+          value={input?.description?.return_values?.return_name || ''}
+          onChange={e => handleChange(e.target, 'description')}
         />
         <Input
           label={'Return Type'}
           name={'return_type'}
-          value={input?.description?.return_type || ''}
-          onChange={e => handleChange(e.target.name, e.target.value, 'description')}
+          id={'return_values'}
+          value={input?.description?.return_values?.return_type || ''}
+          onChange={e => handleChange(e.target, 'description')}
         />
         <Input
           label={'Return Description'}
           name={'return_description'}
-          value={input?.description?.return_description || ''}
-          onChange={e => handleChange(e.target.name, e.target.value, 'description')}
+          id={'return_values'}
+          value={input?.description?.return_values?.return_description || ''}
+          onChange={e => handleChange(e.target, 'description')}
         />
       </HorizontalLayout>
     </>
   )
 }
 
-export default ReturnValues
+export default ReturnValueInputs

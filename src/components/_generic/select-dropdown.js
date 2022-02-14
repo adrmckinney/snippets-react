@@ -16,6 +16,7 @@ type Props = {
   theme?: String,
   hiddenLabel?: Boolean,
   label?: String,
+  name: String,
   hasLabel?: Boolean,
   data: Object,
   initialValue?: String,
@@ -32,6 +33,7 @@ type Props = {
 
 const SelectDropdown = ({
   label,
+  name,
   hasLabel = true,
   data,
   initialValue,
