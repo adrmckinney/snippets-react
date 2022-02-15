@@ -28,12 +28,6 @@ export const withInputChangeState =
     const [inputState, setInputState] = useState(initialValues)
 
     const handleChange = ({ name, value, id }, expression) => {
-      console.log('name', name)
-      console.log('value', value)
-      console.log('id', id)
-      console.log('input?.description?.[id]?.length', !!inputState?.description?.[id])
-      console.log('inputState?.description', inputState?.description)
-      // console.log('Object.keys(inputState?.description)', Object?.keys(inputState?.length))
       switch (expression) {
         case 'description':
           return setInputState(input => ({
@@ -64,61 +58,3 @@ export const withInputChangeState =
       </InputStateContext.Provider>
     )
   }
-
-//   return setInputState(input => ({
-//     ...input,
-//     description: {
-//       ...input?.description,
-//       [id]: !!input?.description?.[id]
-//         ? [
-//             ...input?.description?.[id],
-//             {
-//               ...input?.description?.[id],
-//               [name]: value,
-//             },
-//           ]
-//         : [
-//             {
-//               ...input?.description?.[id],
-//               [name]: value,
-//             },
-//           ],
-//     },
-//   }))
-// default:
-//   return setInputState(input => ({
-//     ...input,
-//     [name]: value,
-//   }))
-
-// setAllocations(
-//   {
-//     ...allocations,
-//     [cartItem?.id]: {
-//       productAllocations:
-//         allocations?.[cartItem?.id]?.productAllocations
-//           ?.length > 0
-//           ? [
-//               ...allocations?.[cartItem?.id]
-//                 ?.productAllocations,
-//               {
-//                 office_id: selectedOffice?.id,
-//                 office_name: selectedOffice?.name,
-//                 location_code:
-//                   selectedOffice?.location_code,
-//                 product_id: cartItem?.product?.id,
-//                 quantity: 0,
-//               },
-//             ]
-//           : [
-//               {
-//                 office_id: selectedOffice?.id,
-//                 office_name: selectedOffice?.name,
-//                 location_code:
-//                   selectedOffice?.location_code,
-//                 product_id: cartItem?.product?.id,
-//                 quantity: 0,
-//               },
-//             ],
-//     },
-//   },

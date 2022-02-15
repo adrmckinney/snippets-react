@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Input from '../../_generic/input'
 import { useInputChangeState } from '../withInputChangeState'
 
@@ -12,6 +12,7 @@ type Props = {
   item: String,
   index: Number,
   fields: Array,
+  initailValue: Object,
 }
 
 const InputsRow = ({
@@ -25,9 +26,6 @@ const InputsRow = ({
   index,
   fields,
 }: Props) => {
-  // const { handleChange, inputState: input } = useInputChangeState()
-  console.log('item', item)
-  // console.log('Object?.keys(item)', Object?.keys(item[index]))
   return (
     <>
       {fields?.map(field => (
@@ -35,6 +33,7 @@ const InputsRow = ({
           key={`field-${item?.key}-${field?.name}`}
           label={field?.label}
           name={field?.name}
+          id={id}
           value={item?.[field?.name]}
           onChange={e => handleChange(e.target, index)}
         />
@@ -44,32 +43,3 @@ const InputsRow = ({
 }
 
 export default InputsRow
-
-// const handleAllocateCartItemSpend = () => {
-//   const spendAllocationData = [...spendAllocation]
-
-//   // eslint-disable-next-line no-unused-expressions
-//   selectedOffices?.forEach((office) => {
-//     let found = spendAllocationData.find((data, i) => {
-//       if (data.office_id === office?.id) {
-//         data['quantity'] += 1
-//         spendAllocationData[i] = data
-
-//         return true
-//       }
-//     })
-
-//     if (!found) {
-//       spendAllocationData.push({
-//         office_id: office?.id,
-//         office_name: office?.name,
-//         location_code: office?.location_code,
-//         quantity: 1,
-//       })
-//     }
-//   })
-
-//   upsertCartItem({
-//     id: item?.id,
-//     input: { spend_allocation: spendAllocationData },
-//   })
