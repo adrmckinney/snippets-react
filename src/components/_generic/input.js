@@ -26,6 +26,7 @@ type Props = {
   textArea?: Boolean,
   textAreaHeight?: String,
   rows?: Number,
+  ref?: Object,
   onChange: () => {},
   onKeyDown?: () => {},
 }
@@ -49,6 +50,7 @@ const Input = ({
   textArea = false,
   textAreaHeight = '',
   rows = 4,
+  ref,
   onChange,
   onKeyDown,
 }: Props) => {
@@ -83,6 +85,7 @@ const Input = ({
             </ConditionalRender>
             <div className={`mt-1 ${textAreaHeight}`}>
               <textarea
+                ref={ref}
                 rows={rows}
                 name={name}
                 id={id}
@@ -133,6 +136,7 @@ const Input = ({
               </div>
             </ConditionalRender>
             <input
+              ref={ref}
               type={type}
               name={name}
               data-id={dataId}

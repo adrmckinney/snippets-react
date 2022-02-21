@@ -33,11 +33,11 @@ export const withInputChangeState =
           return setInputState(input => ({
             ...input,
             description: {
-              ...input?.description,
-              [id]: {
-                ...input?.description?.[id],
-                [name]: value,
-              },
+              // ...input?.description,
+              // [id]: {
+              ...input?.description?.[id],
+              [name]: value,
+              // },
             },
           }))
         default:

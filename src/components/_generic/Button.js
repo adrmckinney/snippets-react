@@ -69,6 +69,7 @@ const Button = ({
   ariaHaspopup,
   srOnly,
   ref,
+  onKeyPress,
 }) => {
   const ICONS = {
     mailOutline: (
@@ -188,6 +189,7 @@ const Button = ({
       ref={ref}
       disabled={disabled ?? false}
       onClick={onClick}
+      onKeyPress={onKeyPress}
       style={overrideButtonStyle}
       role={role}
       aria-controls={ariaControls}

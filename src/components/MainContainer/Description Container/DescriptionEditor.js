@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Button from '../../_generic/Button'
 import HorizontalLayout from '../../_generic/horizontal-layout'
 import VerticalLayout from '../../_generic/vertical-layout'
@@ -7,6 +7,8 @@ import DependenciesInput from './dependencies-input'
 import FunctionalityInput from './functionality-input'
 import InputsRow from './inputs-row'
 import { uuid } from 'uuidv4'
+import PaddedLayout from '../../_generic/padded-layout'
+import Input from '../../_generic/input'
 
 const propFields = [
   {
@@ -43,6 +45,8 @@ const returnValueFields = [
 ]
 
 const DescriptionEditor = () => {
+  const rowRef = useRef(null)
+
   const initailPropValue = {
     key: uuid(),
     prop_name: '',
@@ -76,23 +80,44 @@ const DescriptionEditor = () => {
     }))
   }
   console.log('inputState', inputState)
-  const handleDescriptionChange = ({ name, value, id }, index) => {
+  console.log('descriptionInput', descriptionInput)
+  console.log('rowRef', rowRef)
+
+  const handleDescriptionChange = ({ name, value, id: descriptionKey }, index) => {
     const descriptionData = { ...descriptionInput }
 
-    descriptionData[id][index][name] = value
-    setDescriptionInput(descriptionData)
+    switch (descriptionKey) {
+      case 'props':
+      case 'return_values':
+        descriptionData[descriptionKey][index][name] = value
+        setDescriptionInput(descriptionData)
+        break
+      default:
+        setDescriptionInput(descriptionInput => ({
+          ...descriptionData,
+          [name]: value,
+        }))
+    }
   }
 
   const handleAddDescriptionRow = target => {
     const descriptionData = { ...descriptionInput }
     const propData = { ...initailPropValue }
     const returnData = { ...initailReturnValue }
+
+    const handleInputSelect = () => {
+      const nextField = document.querySelector()
+    }
+
     switch (target) {
       case 'props':
-        return setDescriptionInput(descriptionInput => ({
-          ...descriptionData,
-          [target]: [...descriptionData[target], Object.assign(propData, { key: uuid() })],
-        }))
+        return setDescriptionInput(
+          descriptionInput => ({
+            ...descriptionData,
+            [target]: [...descriptionData[target], Object.assign(propData, { key: uuid() })],
+          })
+          // handleInputSelect()
+        )
       case 'return_values':
         return setDescriptionInput(descriptionInput => ({
           ...descriptionData,
@@ -101,6 +126,10 @@ const DescriptionEditor = () => {
       default:
         return null
     }
+  }
+
+  const handleKeyPress = e => {
+    if (e.keyCode === 13) handleAddDescriptionRow()
   }
 
   return (
@@ -113,13 +142,6 @@ const DescriptionEditor = () => {
             verticalPosition='center'
             additionalClassName={'p-4 justify-evenly'}
           >
-            <Button
-              type={'button'}
-              status={'icon'}
-              size={'small'}
-              icon={'plusSm'}
-              onClick={() => handleAddDescriptionRow('props')}
-            />
             <VerticalLayout>
               {descriptionInput?.props?.map((item, index) => (
                 <HorizontalLayout key={`input-${item?.key}`}>
@@ -129,10 +151,19 @@ const DescriptionEditor = () => {
                     index={index}
                     fields={propFields}
                     id={'props'}
+                    ref={rowRef}
                   />
                 </HorizontalLayout>
               ))}
             </VerticalLayout>
+            <Button
+              type={'button'}
+              status={'icon'}
+              size={'small'}
+              icon={'plusSm'}
+              onKeyPress={handleKeyPress}
+              onClick={() => handleAddDescriptionRow('props')}
+            />
           </HorizontalLayout>
         </div>
 
@@ -143,13 +174,6 @@ const DescriptionEditor = () => {
             verticalPosition='center'
             additionalClassName={'p-4 justify-evenly'}
           >
-            <Button
-              type={'button'}
-              status={'icon'}
-              size={'small'}
-              icon={'plusSm'}
-              onClick={() => handleAddDescriptionRow('return_values')}
-            />
             <VerticalLayout>
               {descriptionInput?.return_values?.map((item, index) => (
                 <HorizontalLayout key={`input-${item?.key}`}>
@@ -164,11 +188,30 @@ const DescriptionEditor = () => {
                 </HorizontalLayout>
               ))}
             </VerticalLayout>
+            <Button
+              type={'button'}
+              status={'icon'}
+              size={'small'}
+              icon={'plusSm'}
+              onKeyPress={handleKeyPress}
+              onClick={() => handleAddDescriptionRow('return_values')}
+            />
           </HorizontalLayout>
         </div>
         <Button title={'combine'} type='button' size={'small'} onClick={handleCombine} />
 
-        <FunctionalityInput />
+        {/* <FunctionalityInput /> */}
+        <PaddedLayout>
+          <Input
+            textArea
+            name={'functionality'}
+            label={'Functionality'}
+            // id='functionality'
+            rows='15'
+            value={descriptionInput?.functionality}
+            onChange={e => handleDescriptionChange(e.target, 'description')}
+          />
+        </PaddedLayout>
 
         <DependenciesInput />
       </div>

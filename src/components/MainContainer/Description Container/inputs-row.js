@@ -1,6 +1,5 @@
 import React from 'react'
 import Input from '../../_generic/input'
-import { useInputChangeState } from '../withInputChangeState'
 
 type Props = {
   label?: String,
@@ -13,6 +12,7 @@ type Props = {
   index: Number,
   fields: Array,
   initailValue: Object,
+  ref?: Object,
 }
 
 const InputsRow = ({
@@ -25,12 +25,14 @@ const InputsRow = ({
   item,
   index,
   fields,
+  ref,
 }: Props) => {
   return (
     <>
       {fields?.map(field => (
         <Input
           key={`field-${item?.key}-${field?.name}`}
+          ref={ref}
           label={field?.label}
           name={field?.name}
           id={id}

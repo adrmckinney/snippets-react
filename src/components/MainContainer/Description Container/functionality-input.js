@@ -15,7 +15,7 @@ const FunctionalityInput = () => {
           label={'Functionality'}
           id='functionality'
           rows='15'
-          value={input?.description?.functionality?.functionality}
+          value={input?.description?.functionality}
           onChange={e => handleChange(e.target, 'description')}
         />
       </PaddedLayout>
