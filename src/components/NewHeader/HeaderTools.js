@@ -1,26 +1,14 @@
 import { useSnippetState } from '../MainContainer/withSnippetState'
 import Button from '../_generic/Button'
 import ConditionalRender from '../_generic/conditional-render'
-import SelectDropdown from '../_generic/select-dropdown'
 import { useEditorState } from './withEditorState'
 
 const HeaderTools = () => {
   const { editorState, dispatch } = useEditorState()
-  const { snippetState, themes, defaultTheme, theme, setTheme } = useSnippetState()
+  const { snippetState } = useSnippetState()
 
   return (
     <>
-      {/* <ConditionalRender condition={editorState?.isCreating || editorState?.isEditing}>
-        <SelectDropdown
-          label={'Theme'}
-          width={'40'}
-          data={Object.keys(themes)}
-          value={theme || defaultTheme}
-          selected={defaultTheme}
-          onChange={e => setTheme(e)}
-        />
-      </ConditionalRender> */}
-
       <ConditionalRender condition={editorState?.isCreating || editorState?.isEditing}>
         <Button
           title={editorState?.isDescription ? 'Code' : 'Desciption'}

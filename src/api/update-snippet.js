@@ -1,6 +1,6 @@
 import { apiUrl } from './routes'
 
-export function updateSnippet(input, id) {
+export function updateSnippet(id, input) {
   return apiUrl
     .put(
       `update-snippet/${id}/`,

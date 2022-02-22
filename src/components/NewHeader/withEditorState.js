@@ -1,4 +1,6 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect } from 'react'
+import { useInputChangeState } from '../MainContainer/withInputChangeState'
+import { useSnippetState } from '../MainContainer/withSnippetState'
 import useEditorStateReducer from './useEditorStateReducer'
 
 const EditorStateContext = createContext()

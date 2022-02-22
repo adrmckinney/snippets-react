@@ -16,7 +16,7 @@ import { useInputChangeState } from './withInputChangeState'
 
 const MainContainer = () => {
   const { editorState, dispatch } = useEditorState()
-  const { invalidateSnippetsList, snippetState, themes } = useSnippetState()
+  const { invalidateSnippetsList, snippetState, themes, formRef } = useSnippetState()
   const { inputState: input, setInputState } = useInputChangeState()
 
   useEffect(() => {
@@ -56,8 +56,7 @@ const MainContainer = () => {
           />
         }
       >
-        {/* <Form handleSubmit={handleSubmit} > */}
-        <form onSubmit={handleSubmit} className='h-full'>
+        <form ref={formRef} onSubmit={handleSubmit} className='h-full'>
           <TwoColLayout
             wrapperClassNames='h-full'
             rightClassNames='h-full'
@@ -67,12 +66,11 @@ const MainContainer = () => {
               <Highlighter
                 language={input?.language}
                 theme={themes[input?.theme]}
-                snippet={input?.snippet}
+                snippet={input?.snippet ?? snippetState?.snippet}
               />
             }
           />
         </form>
-        {/* </Form> */}
       </ConditionalRender>
     </>
   )

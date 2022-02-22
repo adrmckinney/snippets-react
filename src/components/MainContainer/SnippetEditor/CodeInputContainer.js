@@ -7,11 +7,15 @@ import Input from '../../_generic/input'
 import PaddedLayout from '../../_generic/padded-layout'
 import DescriptionEditor from '../Description Container/DescriptionEditor'
 import { useInputChangeState } from '../withInputChangeState'
+import { useSnippetState } from '../withSnippetState'
 
 const CodeInputContainer = () => {
   const { editorState } = useEditorState()
-  const { handleChange, inputState: input } = useInputChangeState()
-
+  const { handleChange, inputState: input, setInputState } = useInputChangeState()
+  const { snippetState } = useSnippetState()
+  console.log('snippetState', snippetState)
+  // setInputState(snippetState)
+  console.log('input', input)
   return (
     <>
       <PaddedLayout classNames='h-full'>

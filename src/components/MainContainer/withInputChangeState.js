@@ -1,6 +1,8 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { useEditorState } from '../NewHeader/withEditorState'
+import { useSnippetState } from './withSnippetState'
 
 const InputStateContext = createContext()
 const SetInputStateContext = createContext()
@@ -25,7 +27,19 @@ const initialValues = {
 export const withInputChangeState =
   Component =>
   ({ ...rest }) => {
+    const { snippetState } = useSnippetState()
+    const { editorState } = useEditorState()
+    console.log('snippetState', snippetState)
+    console.log('editorState', editorState)
     const [inputState, setInputState] = useState(initialValues)
+
+    useEffect(() => {
+      if (editorState?.isEditing === true) {
+        setInputState(snippetState)
+      } else {
+        setInputState(initialValues)
+      }
+    }, [editorState?.isEditing])
 
     const handleChange = ({ name, value, id }, expression) => {
       switch (expression) {
@@ -33,11 +47,8 @@ export const withInputChangeState =
           return setInputState(input => ({
             ...input,
             description: {
-              // ...input?.description,
-              // [id]: {
               ...input?.description?.[id],
               [name]: value,
-              // },
             },
           }))
         default:
