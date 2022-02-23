@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Button from '../../_generic/Button'
 import HorizontalLayout from '../../_generic/horizontal-layout'
 import VerticalLayout from '../../_generic/vertical-layout'
@@ -7,6 +7,7 @@ import InputsRow from './inputs-row'
 import { uuid } from 'uuidv4'
 import PaddedLayout from '../../_generic/padded-layout'
 import Input from '../../_generic/input'
+import { initailDependencyValue, initialDescriptionValue } from './initialValuesHelper'
 
 const propFields = [
   {
@@ -58,9 +59,10 @@ const dependencyFields = [
 ]
 
 const DescriptionEditor = () => {
+  const { setInputState, inputState, descriptionInput, setDescriptionInput } = useInputChangeState()
   const rowRef = useRef(null)
 
-  const initailPropValue = {
+  const initialPropValue = {
     key: uuid(),
     prop_name: '',
     prop_type: '',
@@ -68,38 +70,30 @@ const DescriptionEditor = () => {
     description: '',
   }
 
-  const initailReturnValue = {
+  const initialReturnValue = {
     key: uuid(),
     return_name: '',
     return_type: '',
     return_description: '',
   }
 
-  const initailDependencyValue = {
+  const initialDependencyValue = {
     key: uuid(),
     name: '',
     type: '',
     description: '',
   }
 
-  const initailDescriptionValue = {
-    props: [initailPropValue],
-    return_values: [initailReturnValue],
-    dependencies: [initailDependencyValue],
+  const initialDescriptionValue = {
+    props: [initialPropValue],
+    return_values: [initialReturnValue],
+    dependencies: [initialDependencyValue],
   }
 
-  const [descriptionInput, setDescriptionInput] = useState(initailDescriptionValue)
-  const { setInputState, inputState } = useInputChangeState()
+  useEffect(() => {
+    setDescriptionInput(initialDescriptionValue)
+  }, [])
 
-  const handleCombine = () => {
-    const inputData = { ...inputState }
-    const descriptionData = { ...descriptionInput }
-
-    setInputState(inputState => ({
-      ...inputData,
-      description: descriptionData,
-    }))
-  }
   console.log('inputState', inputState)
   console.log('descriptionInput', descriptionInput)
 
@@ -123,9 +117,9 @@ const DescriptionEditor = () => {
 
   const handleAddRow = target => {
     const descriptionData = { ...descriptionInput }
-    const propData = { ...initailPropValue }
-    const returnData = { ...initailReturnValue }
-    const dependencyData = { ...initailDependencyValue }
+    const propData = { ...initialPropValue }
+    const returnData = { ...initialReturnValue }
+    const dependencyData = { ...initialDependencyValue }
 
     const handleInputSelect = () => {
       const nextField = document.querySelector()
@@ -167,15 +161,16 @@ const DescriptionEditor = () => {
             additionalClassName={'p-4 justify-evenly'}
           >
             <VerticalLayout>
-              {descriptionInput?.props?.map((item, index) => (
-                <HorizontalLayout key={`input-${item?.key}`} horizontalPosition='between'>
+              {descriptionInput?.props?.map((prop, index) => (
+                <HorizontalLayout key={`input-${prop?.key}`} horizontalPosition='between'>
                   <InputsRow
-                    item={item}
+                    item={prop}
                     handleChange={handleDescriptionChange}
                     index={index}
                     fields={propFields}
                     id={'props'}
                     ref={rowRef}
+                    inputState={inputState}
                   />
                 </HorizontalLayout>
               ))}
@@ -199,15 +194,16 @@ const DescriptionEditor = () => {
             additionalClassName={'p-4 justify-evenly'}
           >
             <VerticalLayout>
-              {descriptionInput?.return_values?.map((item, index) => (
-                <HorizontalLayout key={`input-${item?.key}`} horizontalPosition='between'>
+              {descriptionInput?.return_values?.map((value, index) => (
+                <HorizontalLayout key={`input-${value?.key}`} horizontalPosition='between'>
                   <InputsRow
-                    item={item}
-                    isDescription={item?.isDescription}
+                    item={value}
+                    isDescription={value?.isDescription}
                     index={index}
                     fields={returnValueFields}
                     handleChange={handleDescriptionChange}
                     id={'return_values'}
+                    inputState={inputState}
                   />
                 </HorizontalLayout>
               ))}
@@ -222,7 +218,7 @@ const DescriptionEditor = () => {
             />
           </HorizontalLayout>
         </div>
-        <Button title={'combine'} type='button' size={'small'} onClick={handleCombine} />
+        <Button title={'combine'} type='button' size={'small'} onClick={() => {}} />
 
         <div className='m-4 border-4'>
           <h2 className='pl-4 pt-2'>Dependencies</h2>
@@ -232,15 +228,16 @@ const DescriptionEditor = () => {
             additionalClassName={'p-4 justify-evenly'}
           >
             <VerticalLayout>
-              {descriptionInput?.dependencies?.map((item, index) => (
-                <HorizontalLayout key={`input-${item?.key}`} horizontalPosition='between'>
+              {descriptionInput?.dependencies?.map((dependency, index) => (
+                <HorizontalLayout key={`input-${dependency?.key}`} horizontalPosition='between'>
                   <InputsRow
-                    item={item}
+                    item={dependency}
                     handleChange={handleDescriptionChange}
                     index={index}
                     fields={dependencyFields}
                     id={'dependencies'}
                     ref={rowRef}
+                    inputState={inputState}
                   />
                 </HorizontalLayout>
               ))}
@@ -263,7 +260,7 @@ const DescriptionEditor = () => {
             label={'Functionality'}
             // id='functionality'
             rows='15'
-            value={descriptionInput?.functionality}
+            value={inputState?.description?.functionality ?? descriptionInput?.functionality}
             onChange={e => handleDescriptionChange(e.target, 'description')}
           />
         </PaddedLayout>

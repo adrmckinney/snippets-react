@@ -13,6 +13,7 @@ type Props = {
   fields: Array,
   initailValue: Object,
   ref?: Object,
+  inputState: Object,
 }
 
 const InputsRow = ({
@@ -26,6 +27,7 @@ const InputsRow = ({
   index,
   fields,
   ref,
+  inputState,
 }: Props) => {
   return (
     <>
@@ -36,7 +38,7 @@ const InputsRow = ({
           label={field?.label}
           name={field?.name}
           id={id}
-          value={item?.[field?.name]}
+          value={inputState?.description?.[id]?.[0]?.[field?.name] ?? item?.[field?.name]}
           onChange={e => handleChange(e.target, index)}
         />
       ))}

@@ -11,14 +11,20 @@ import { useInputChangeState } from '../withInputChangeState'
 import { useSnippetState } from '../withSnippetState'
 
 const DetailInputsContainer = () => {
-  const { editorState } = useEditorState()
-  const { handleChange, inputState: input } = useInputChangeState()
+  const { editorState, dispatch } = useEditorState()
+  const { handleChange, handleMergeDescriptionData, inputState: input } = useInputChangeState()
   const { languages, themes } = useSnippetState()
-  const { snippetState, invalidateSnippetsList, formRef } = useSnippetState()
+  const { snippetState, invalidateSnippetsList } = useSnippetState()
 
   const handleSubmit = e => {
     e.preventDefault()
-    updateSnippet(snippetState?.id, input).then(data => invalidateSnippetsList())
+    handleMergeDescriptionData()
+    // TODO: need to get the update to handle the combine data…not working for some reason
+
+    // updateSnippet(snippetState?.id, input).then(data => {
+    //   // dispatch({ type: 'is-editing', payload: !editorState?.isEditing })
+    //   invalidateSnippetsList()
+    // })
   }
 
   return (
