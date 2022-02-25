@@ -94,8 +94,8 @@ const DescriptionEditor = () => {
     setDescriptionInput(initialDescriptionValue)
   }, [])
 
-  console.log('inputState', inputState)
-  console.log('descriptionInput', descriptionInput)
+  // console.log('inputState', inputState)
+  // console.log('descriptionInput', descriptionInput)
 
   const handleDescriptionChange = ({ name, value, id: descriptionKey }, index) => {
     const descriptionData = { ...descriptionInput }
@@ -218,7 +218,6 @@ const DescriptionEditor = () => {
             />
           </HorizontalLayout>
         </div>
-        <Button title={'combine'} type='button' size={'small'} onClick={() => {}} />
 
         <div className='m-4 border-4'>
           <h2 className='pl-4 pt-2'>Dependencies</h2>

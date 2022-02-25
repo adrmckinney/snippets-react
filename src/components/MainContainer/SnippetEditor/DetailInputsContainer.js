@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import { updateSnippet } from '../../../api/update-snippet'
 import { useEditorState } from '../../NewHeader/withEditorState'
 import Button from '../../_generic/Button'
 import HorizontalLayout from '../../_generic/horizontal-layout'
@@ -11,21 +10,9 @@ import { useInputChangeState } from '../withInputChangeState'
 import { useSnippetState } from '../withSnippetState'
 
 const DetailInputsContainer = () => {
-  const { editorState, dispatch } = useEditorState()
-  const { handleChange, handleMergeDescriptionData, inputState: input } = useInputChangeState()
+  const { editorState } = useEditorState()
+  const { handleChange, handleSubmit, inputState: input } = useInputChangeState()
   const { languages, themes } = useSnippetState()
-  const { snippetState, invalidateSnippetsList } = useSnippetState()
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    handleMergeDescriptionData()
-    // TODO: need to get the update to handle the combine data…not working for some reason
-
-    // updateSnippet(snippetState?.id, input).then(data => {
-    //   // dispatch({ type: 'is-editing', payload: !editorState?.isEditing })
-    //   invalidateSnippetsList()
-    // })
-  }
 
   return (
     <>
@@ -69,7 +56,7 @@ const DetailInputsContainer = () => {
           title={editorState?.isEditing ? 'Update' : 'Create'}
           status={'primary'}
           size={'small'}
-          type='submit'
+          type='button'
           onClick={handleSubmit}
         />
       </HorizontalLayout>
