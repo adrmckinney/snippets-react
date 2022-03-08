@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import * as languages from 'react-syntax-highlighter/dist/cjs/languages/hljs'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { createSnippet } from '../../api/create-snippet'
 import { updateSnippet } from '../../api/update-snippet'
 import { useEditorState } from '../NewHeader/withEditorState'
 import usePrevious from '../_generic/usePrevious'
@@ -55,32 +56,21 @@ export const withInputChangeState =
       editorState?.isEditing ? setInputState(snippetState) : setInputState(initialValues)
     }, [editorState?.isEditing])
 
-    let flag = false
-
     const handleSubmit = () => {
-      handleMergeDescriptionData()
-      // use concate
-      flag = true
-    }
+      const inputData = { ...inputState, description: descriptionInput }
 
-    const handleMergeDescriptionData = () => {
-      const inputData = { ...inputState }
-
-      setInputState(inputState => ({
-        ...inputData,
-        description: descriptionInput,
-      }))
-    }
-    console.log('previous', previous)
-    useEffect(() => {
-      if (flag === true) {
-        updateSnippet(snippetState?.id, inputState).then(data => {
+      if (editorState?.isEditing) {
+        updateSnippet(snippetState?.id, inputData).then(data => {
           dispatch({ type: 'is-editing', payload: !editorState?.isEditing })
           invalidateSnippetsList()
-          flag = false
+        })
+      } else {
+        createSnippet(inputData).then(data => {
+          dispatch({ type: 'is-creating', payload: !editorState?.isCreating })
+          invalidateSnippetsList()
         })
       }
-    }, [inputState?.description])
+    }
 
     const handleChange = ({ name, value, id }, expression) => {
       switch (expression) {
@@ -107,9 +97,9 @@ export const withInputChangeState =
             <SetInputStateContext.Provider value={setInputState}>
               <SetDescriptionInputContext.Provider value={setDescriptionInput}>
                 <InputChangeContext.Provider value={handleChange}>
-                  <MergeDescriptionContext.Provider value={handleMergeDescriptionData}>
-                    <Component {...rest} />
-                  </MergeDescriptionContext.Provider>
+                  {/* <MergeDescriptionContext.Provider value={handleMergeDescriptionData}> */}
+                  <Component {...rest} />
+                  {/* </MergeDescriptionContext.Provider> */}
                 </InputChangeContext.Provider>
               </SetDescriptionInputContext.Provider>
             </SetInputStateContext.Provider>
