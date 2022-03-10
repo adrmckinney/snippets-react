@@ -10,7 +10,7 @@ const FunctionalityInput = () => {
     <>
       <PaddedLayout>
         <Input
-          textArea
+          isTextArea
           name={'functionality'}
           label={'Functionality'}
           id='functionality'

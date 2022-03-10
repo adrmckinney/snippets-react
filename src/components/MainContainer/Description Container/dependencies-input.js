@@ -10,7 +10,7 @@ const DependenciesInput = () => {
     <>
       <PaddedLayout>
         <Input
-          textArea
+          isTextArea
           name={'dependencies'}
           label={'Dependencies'}
           id='dependencies'

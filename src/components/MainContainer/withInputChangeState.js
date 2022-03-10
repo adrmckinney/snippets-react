@@ -4,7 +4,6 @@ import * as themes from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { createSnippet } from '../../api/create-snippet'
 import { updateSnippet } from '../../api/update-snippet'
 import { useEditorState } from '../NewHeader/withEditorState'
-import usePrevious from '../_generic/usePrevious'
 import { useSnippetState } from './withSnippetState'
 
 const InputStateContext = createContext()
@@ -12,7 +11,6 @@ const SetInputStateContext = createContext()
 const DescriptionInputContext = createContext()
 const SetDescriptionInputContext = createContext()
 const InputChangeContext = createContext()
-const MergeDescriptionContext = createContext()
 const HandleSubmitContext = createContext()
 
 const defaultLanguage = `${'javascript' || Object.keys(languages).sort()[0]}`
@@ -24,7 +22,6 @@ export const useInputChangeState = initailDescriptionValue => {
   const descriptionInput = useContext(DescriptionInputContext)
   const setDescriptionInput = useContext(SetDescriptionInputContext)
   const handleChange = useContext(InputChangeContext)
-  const handleMergeDescriptionData = useContext(MergeDescriptionContext)
   const handleSubmit = useContext(HandleSubmitContext)
 
   return {
@@ -33,7 +30,6 @@ export const useInputChangeState = initailDescriptionValue => {
     descriptionInput,
     setDescriptionInput,
     handleChange,
-    handleMergeDescriptionData,
     handleSubmit,
   }
 }
@@ -50,7 +46,6 @@ export const withInputChangeState =
     const { editorState, dispatch } = useEditorState()
     const [inputState, setInputState] = useState(initialValues)
     const [descriptionInput, setDescriptionInput] = useState()
-    const previous = usePrevious(inputState)
 
     useEffect(() => {
       editorState?.isEditing ? setInputState(snippetState) : setInputState(initialValues)
@@ -61,12 +56,12 @@ export const withInputChangeState =
 
       if (editorState?.isEditing) {
         updateSnippet(snippetState?.id, inputData).then(data => {
-          dispatch({ type: 'is-editing', payload: !editorState?.isEditing })
+          dispatch({ type: 'reset' })
           invalidateSnippetsList()
         })
       } else {
         createSnippet(inputData).then(data => {
-          dispatch({ type: 'is-creating', payload: !editorState?.isCreating })
+          dispatch({ type: 'reset' })
           invalidateSnippetsList()
         })
       }
@@ -97,9 +92,7 @@ export const withInputChangeState =
             <SetInputStateContext.Provider value={setInputState}>
               <SetDescriptionInputContext.Provider value={setDescriptionInput}>
                 <InputChangeContext.Provider value={handleChange}>
-                  {/* <MergeDescriptionContext.Provider value={handleMergeDescriptionData}> */}
                   <Component {...rest} />
-                  {/* </MergeDescriptionContext.Provider> */}
                 </InputChangeContext.Provider>
               </SetDescriptionInputContext.Provider>
             </SetInputStateContext.Provider>

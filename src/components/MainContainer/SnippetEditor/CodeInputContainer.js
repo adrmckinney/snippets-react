@@ -19,7 +19,7 @@ const CodeInputContainer = () => {
           condition={editorState.isDescription}
           falseRender={
             <Input
-              textArea
+              isTextArea
               name={'snippet'}
               placeholder={'Code'}
               textAreaHeight='h-full'

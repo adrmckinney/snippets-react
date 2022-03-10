@@ -23,7 +23,7 @@ type Props = {
   icon?: String,
   inputStyles?: Object,
   labelStyles?: Object,
-  textArea?: Boolean,
+  isTextArea?: Boolean,
   textAreaHeight?: String,
   rows?: Number,
   ref?: Object,
@@ -47,7 +47,7 @@ const Input = ({
   icon = '',
   inputStyles,
   labelStyles,
-  textArea = false,
+  isTextArea = false,
   textAreaHeight = '',
   rows = 4,
   ref,
@@ -61,7 +61,7 @@ const Input = ({
   return (
     <>
       <ConditionalRender
-        condition={!textArea}
+        condition={!isTextArea}
         falseRender={
           <div className={textAreaHeight}>
             <ConditionalRender

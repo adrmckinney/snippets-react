@@ -1,13 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../_generic/Button'
 import HorizontalLayout from '../../_generic/horizontal-layout'
 import VerticalLayout from '../../_generic/vertical-layout'
 import { useInputChangeState } from '../withInputChangeState'
 import InputsRow from './inputs-row'
-import { uuid } from 'uuidv4'
+import { v4 } from 'uuid'
 import PaddedLayout from '../../_generic/padded-layout'
 import Input from '../../_generic/input'
-import { initailDependencyValue, initialDescriptionValue } from './initialValuesHelper'
+import { useEditorState } from '../../NewHeader/withEditorState'
+import ResponsiveGridLayout from '../../_generic/responsive-grid-layout'
 
 const propFields = [
   {
@@ -19,12 +20,13 @@ const propFields = [
     name: 'prop_type',
   },
   {
-    label: 'Required',
+    label: 'Optional/Required',
     name: 'required',
   },
   {
     label: 'Description',
     name: 'prop_description',
+    isTextArea: true,
   },
 ]
 
@@ -59,11 +61,11 @@ const dependencyFields = [
 ]
 
 const DescriptionEditor = () => {
-  const { setInputState, inputState, descriptionInput, setDescriptionInput } = useInputChangeState()
-  const rowRef = useRef(null)
+  const { inputState, descriptionInput, setDescriptionInput } = useInputChangeState()
+  const { editorState } = useEditorState()
 
   const initialPropValue = {
-    key: uuid(),
+    key: v4(),
     prop_name: '',
     prop_type: '',
     required: '',
@@ -71,14 +73,14 @@ const DescriptionEditor = () => {
   }
 
   const initialReturnValue = {
-    key: uuid(),
+    key: v4(),
     return_name: '',
     return_type: '',
     return_description: '',
   }
 
   const initialDependencyValue = {
-    key: uuid(),
+    key: v4(),
     name: '',
     type: '',
     description: '',
@@ -91,11 +93,10 @@ const DescriptionEditor = () => {
   }
 
   useEffect(() => {
-    setDescriptionInput(initialDescriptionValue)
+    editorState?.isEditing
+      ? setDescriptionInput(inputState?.description)
+      : setDescriptionInput(initialDescriptionValue)
   }, [])
-
-  // console.log('inputState', inputState)
-  // console.log('descriptionInput', descriptionInput)
 
   const handleDescriptionChange = ({ name, value, id: descriptionKey }, index) => {
     const descriptionData = { ...descriptionInput }
@@ -129,17 +130,17 @@ const DescriptionEditor = () => {
       case 'props':
         return setDescriptionInput(descriptionInput => ({
           ...descriptionData,
-          [target]: [...descriptionData[target], Object.assign(propData, { key: uuid() })],
+          [target]: [...descriptionData[target], Object.assign(propData, { key: v4() })],
         }))
       case 'return_values':
         return setDescriptionInput(descriptionInput => ({
           ...descriptionData,
-          [target]: [...descriptionData[target], Object.assign(returnData, { key: uuid() })],
+          [target]: [...descriptionData[target], Object.assign(returnData, { key: v4() })],
         }))
       case 'dependencies':
         return setDescriptionInput(descriptionInput => ({
           ...descriptionData,
-          [target]: [...descriptionData[target], Object.assign(dependencyData, { key: uuid() })],
+          [target]: [...descriptionData[target], Object.assign(dependencyData, { key: v4() })],
         }))
       default:
         return null
@@ -162,17 +163,22 @@ const DescriptionEditor = () => {
           >
             <VerticalLayout>
               {descriptionInput?.props?.map((prop, index) => (
-                <HorizontalLayout key={`input-${prop?.key}`} horizontalPosition='between'>
+                <ResponsiveGridLayout
+                  key={`prop-${prop?.key}`}
+                  cols={'' + (propFields?.length - 1)}
+                  colGap='2'
+                  rowGap='2'
+                  classNames={'lg:px-0 lg:py-2 xl:px-0 xl:py-2'}
+                >
                   <InputsRow
                     item={prop}
                     handleChange={handleDescriptionChange}
                     index={index}
                     fields={propFields}
                     id={'props'}
-                    ref={rowRef}
                     inputState={inputState}
                   />
-                </HorizontalLayout>
+                </ResponsiveGridLayout>
               ))}
             </VerticalLayout>
             <Button
@@ -235,7 +241,6 @@ const DescriptionEditor = () => {
                     index={index}
                     fields={dependencyFields}
                     id={'dependencies'}
-                    ref={rowRef}
                     inputState={inputState}
                   />
                 </HorizontalLayout>
@@ -254,12 +259,12 @@ const DescriptionEditor = () => {
 
         <PaddedLayout>
           <Input
-            textArea
+            isTextArea
             name={'functionality'}
             label={'Functionality'}
             // id='functionality'
             rows='15'
-            value={inputState?.description?.functionality ?? descriptionInput?.functionality}
+            value={descriptionInput?.functionality}
             onChange={e => handleDescriptionChange(e.target, 'description')}
           />
         </PaddedLayout>

@@ -44,8 +44,6 @@ export const withSnippetState =
     const [snippetsListState, setSnippetsListState] = useState(null)
     const [theme, setTheme] = useState(snippetState?.theme)
     const formRef = useRef()
-    console.log('snippetState', snippetState)
-    console.log('snippetId', snippetId)
 
     useEffect(() => {
       getSnippet(snippetId).then(data => setSnippetState(data.snippet))
