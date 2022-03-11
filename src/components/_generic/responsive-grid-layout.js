@@ -4,26 +4,47 @@ import React, { Node } from 'react'
 
 type Props = {
   children: Node,
-  classNames?: String,
-  cols?: String,
-  colGap?: String,
-  rowGap?: String,
+  classNames?: Object,
+  cols?: Object,
+  colGap?: Object,
+  rowGap?: Object,
+  py?: Object,
+  px?: Object,
 }
 
 const ResponsiveGridLayout = ({
   children,
   classNames = '',
-  cols = '4',
-  colGap = '6',
-  rowGap = '6',
+  cols = { sm: '2', lg: '4' },
+  colGap = { mbl: '6', sm: '6' },
+  rowGap = { sm: '6' },
+  px = { mbl: '4', sm: '6', lg: '8' },
+  py = { mbl: '6', sm: '8', lg: '12', xl: '16' },
 }: Props) => {
   return (
-    <div
-      className={`max-w-7xl mx-auto grid gap-y-6 px-4 py-6 sm:grid-cols-2 sm:gap-${colGap} sm:px-6 sm:py-8 lg:grid-cols-${cols} lg:px-8 lg:py-12 xl:py-16 ${classNames}`}
-    >
-      {children}
-    </div>
+    <div className={styles.responsiveGrid({ colGap, cols, py, px, classNames })}>{children}</div>
   )
 }
 
 export default ResponsiveGridLayout
+
+const styles = {
+  responsiveGrid: ({ colGap, cols, py, px, classNames }) =>
+    [
+      'max-w-7xl',
+      'mx-auto',
+      'grid',
+      `gap-y-${colGap.mbl}`,
+      `px-${px.mbl}`,
+      `py-${py.mbl}`,
+      `sm:grid-cols-${cols.sm}`,
+      `sm:gap-${colGap.sm}`,
+      `sm:px-${px.sm}`,
+      `sm:py-${py.sm}`,
+      `lg:grid-cols-${cols.lg}`,
+      `lg:px-${px.lg}`,
+      `lg:py-${py.lg}`,
+      `xl:py-${py.xl}`,
+      classNames,
+    ].join(' '),
+}

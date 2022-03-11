@@ -42,6 +42,7 @@ const returnValueFields = [
   {
     label: 'Description',
     name: 'return_description',
+    isTextArea: true,
   },
 ]
 
@@ -57,6 +58,7 @@ const dependencyFields = [
   {
     label: 'Description',
     name: 'description',
+    isTextArea: true,
   },
 ]
 
@@ -100,6 +102,11 @@ const DescriptionEditor = () => {
 
   const handleDescriptionChange = ({ name, value, id: descriptionKey }, index) => {
     const descriptionData = { ...descriptionInput }
+    console.log('descriptionData', descriptionData)
+    console.log('descriptionKey', descriptionKey)
+    console.log('index', index)
+    console.log('name', name)
+    console.log('value', value)
 
     switch (descriptionKey) {
       case 'props':
@@ -165,10 +172,10 @@ const DescriptionEditor = () => {
               {descriptionInput?.props?.map((prop, index) => (
                 <ResponsiveGridLayout
                   key={`prop-${prop?.key}`}
-                  cols={'' + (propFields?.length - 1)}
-                  colGap='2'
-                  rowGap='2'
-                  classNames={'lg:px-0 lg:py-2 xl:px-0 xl:py-2'}
+                  cols={{ lg: '' + (propFields?.length - 1) }}
+                  colGap={{ lg: '2' }}
+                  px={{ lg: '2' }}
+                  py={{ xl: '2' }}
                 >
                   <InputsRow
                     item={prop}
@@ -201,7 +208,13 @@ const DescriptionEditor = () => {
           >
             <VerticalLayout>
               {descriptionInput?.return_values?.map((value, index) => (
-                <HorizontalLayout key={`input-${value?.key}`} horizontalPosition='between'>
+                <ResponsiveGridLayout
+                  key={`prop-${value?.key}`}
+                  cols={{ lg: '' + (returnValueFields?.length - 1) }}
+                  colGap={{ lg: '2' }}
+                  px={{ lg: '2' }}
+                  py={{ xl: '2' }}
+                >
                   <InputsRow
                     item={value}
                     isDescription={value?.isDescription}
@@ -211,7 +224,7 @@ const DescriptionEditor = () => {
                     id={'return_values'}
                     inputState={inputState}
                   />
-                </HorizontalLayout>
+                </ResponsiveGridLayout>
               ))}
             </VerticalLayout>
             <Button
@@ -234,7 +247,14 @@ const DescriptionEditor = () => {
           >
             <VerticalLayout>
               {descriptionInput?.dependencies?.map((dependency, index) => (
-                <HorizontalLayout key={`input-${dependency?.key}`} horizontalPosition='between'>
+                <ResponsiveGridLayout
+                  key={`prop-${dependency?.key}`}
+                  cols={{ lg: '' + (dependencyFields?.length - 1) }}
+                  colGap={{ lg: '2' }}
+                  px={{ lg: '2' }}
+                  py={{ xl: '2' }}
+                >
+                  {/* <HorizontalLayout key={`input-${dependency?.key}`} horizontalPosition='between'> */}
                   <InputsRow
                     item={dependency}
                     handleChange={handleDescriptionChange}
@@ -243,7 +263,8 @@ const DescriptionEditor = () => {
                     id={'dependencies'}
                     inputState={inputState}
                   />
-                </HorizontalLayout>
+                  {/* </HorizontalLayout> */}
+                </ResponsiveGridLayout>
               ))}
             </VerticalLayout>
             <Button

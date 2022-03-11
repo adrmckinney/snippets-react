@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import ConditionalRender from '../../_generic/conditional-render'
 import Input from '../../_generic/input'
 
 type Props = {
