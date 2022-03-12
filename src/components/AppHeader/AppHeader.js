@@ -25,10 +25,9 @@ const AppHeader = ({ setShowEditor, showEditor }: Props) => {
       <MobilePopOverButton />
 
       <HorizontalLayout
-        horizontalPosition={'between'}
-        verticalPosition={'center'}
-        mobileHidden={'hidden'}
-        sizeToDisplay={'md:'}
+        flex={{ sm: '', md: 'flex' }}
+        horizontalPosition={{ md: 'between' }}
+        verticalPosition={{ md: 'center' }}
       >
         <PopOverGroup>
           <PopOver title={'React'} children={<HeaderPopOverContent />} />

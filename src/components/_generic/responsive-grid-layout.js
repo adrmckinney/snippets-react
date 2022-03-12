@@ -22,13 +22,13 @@ const ResponsiveGridLayout = ({
   py = { mbl: '6', sm: '8', lg: '12', xl: '16' },
 }: Props) => {
   return (
-    <div className={styles.responsiveGrid({ colGap, cols, py, px, classNames })}>{children}</div>
+    <div className={Styles.responsiveGrid({ colGap, cols, py, px, classNames })}>{children}</div>
   )
 }
 
 export default ResponsiveGridLayout
 
-const styles = {
+const Styles = {
   responsiveGrid: ({ colGap, cols, py, px, classNames }) =>
     [
       'max-w-7xl',

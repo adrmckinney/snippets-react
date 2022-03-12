@@ -67,7 +67,7 @@ const Input = ({
             <ConditionalRender
               condition={!labelRight}
               falseRender={
-                <HorizontalLayout horizontalPosition='between'>
+                <HorizontalLayout horizontalPosition={{ sm: 'between' }}>
                   <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
                     {label}
                   </label>
@@ -109,7 +109,7 @@ const Input = ({
           <ConditionalRender
             condition={!labelRight}
             falseRender={
-              <HorizontalLayout horizontalPosition='between'>
+              <HorizontalLayout horizontalPosition={{ sm: 'between' }}>
                 <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
                   {label}
                 </label>

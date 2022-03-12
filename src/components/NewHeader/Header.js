@@ -33,10 +33,15 @@ const Header = () => {
         />
 
         <HorizontalLayout
-          horizontalPosition='between'
-          additionalClassName='w-3/4 px-4 sm:px-2 flex-none space-x-4'
+          flex1={{ sm: 'none' }}
+          horizontalPosition={{ sm: 'between' }}
+          classNames={['w-3/4', 'px-4', 'sm:px-2', 'space-x-4'].join(' ')}
         >
-          <HorizontalLayout horizontalPosition='start' additionalClassName='flex-none space-x-2'>
+          <HorizontalLayout
+            flex1={{ sm: 'none' }}
+            horizontalPosition={{ sm: 'start' }}
+            classNames={['space-x-2'].join(' ')}
+          >
             <HeaderTools />
           </HorizontalLayout>
           <ConditionalRender condition={editorState.isCreating || editorState.isEditing}>

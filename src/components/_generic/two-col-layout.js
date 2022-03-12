@@ -27,7 +27,7 @@ const TwoColLayout = ({
 }: Props) => {
   return (
     <>
-      <HorizontalLayout additionalClassName={`overflow-hidden ${wrapperClassNames}`}>
+      <HorizontalLayout classNames={`overflow-hidden ${wrapperClassNames}`}>
         {/* Left Section */}
         <section
           aria-labelledby='primary-heading'

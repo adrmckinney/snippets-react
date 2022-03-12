@@ -16,7 +16,7 @@ const DetailInputsContainer = () => {
 
   return (
     <>
-      <HorizontalLayout horizontalPosition='evenly flex-none'>
+      <HorizontalLayout flex1={{ sm: 'none' }} horizontalPosition={{ sm: 'evenly' }}>
         <Input
           hasLabel={false}
           name={'title'}

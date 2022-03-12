@@ -4,7 +4,6 @@ import React from 'react'
 import Input from '../../_generic/input'
 
 type Props = {
-  dataId: Number,
   id: String,
   isDescription?: Boolean,
   handleChange?: () => {},
@@ -18,7 +17,6 @@ type Props = {
 }
 
 const InputsRow = ({
-  dataId,
   id,
   isDescription = false,
   handleChange,
@@ -31,17 +29,17 @@ const InputsRow = ({
 }: Props) => {
   return (
     <>
-      {fields?.map((field, index) => (
+      {fields?.map((field, idx) => (
         <div
           key={`field-${item?.key}-${field?.name}`}
-          className={index === fields?.length - 1 ? `col-span-${fields?.length - 1}` : 'col-span-1'}
+          className={idx === fields?.length - 1 ? `col-span-${fields?.length - 1}` : 'col-span-1'}
         >
           <Input
             ref={ref}
             label={field?.label}
             name={field?.name}
             id={id}
-            isTextArea={field?.isTextArea ?? false}
+            isTextArea={field?.isTextArea}
             value={item?.[field?.name] || ''}
             onChange={e => handleChange(e.target, index)}
           />

@@ -21,7 +21,7 @@ const propFields = [
   },
   {
     label: 'Optional/Required',
-    name: 'required',
+    name: 'optional_required',
   },
   {
     label: 'Description',
@@ -85,6 +85,7 @@ const DescriptionEditor = () => {
     key: v4(),
     name: '',
     type: '',
+    required: '',
     description: '',
   }
 
@@ -102,11 +103,6 @@ const DescriptionEditor = () => {
 
   const handleDescriptionChange = ({ name, value, id: descriptionKey }, index) => {
     const descriptionData = { ...descriptionInput }
-    console.log('descriptionData', descriptionData)
-    console.log('descriptionKey', descriptionKey)
-    console.log('index', index)
-    console.log('name', name)
-    console.log('value', value)
 
     switch (descriptionKey) {
       case 'props':
@@ -164,9 +160,9 @@ const DescriptionEditor = () => {
         <div className='m-4 border-4'>
           <h2 className='pl-4 pt-2'>Props</h2>
           <HorizontalLayout
-            horizontalPosition='center'
-            verticalPosition='center'
-            additionalClassName={'p-4 justify-evenly'}
+            horizontalPosition={{ sm: 'evenly' }}
+            verticalPosition={{ sm: 'center' }}
+            classNames={'p-4'}
           >
             <VerticalLayout>
               {descriptionInput?.props?.map((prop, index) => (
@@ -202,9 +198,9 @@ const DescriptionEditor = () => {
         <div className='m-4 border-4'>
           <h2 className='pl-4 pt-2'>Return Values</h2>
           <HorizontalLayout
-            horizontalPosition='center'
-            verticalPosition='center'
-            additionalClassName={'p-4 justify-evenly'}
+            horizontalPosition={{ sm: 'evenly' }}
+            verticalPosition={{ sm: 'center' }}
+            classNames={'p-4'}
           >
             <VerticalLayout>
               {descriptionInput?.return_values?.map((value, index) => (
@@ -241,9 +237,9 @@ const DescriptionEditor = () => {
         <div className='m-4 border-4'>
           <h2 className='pl-4 pt-2'>Dependencies</h2>
           <HorizontalLayout
-            horizontalPosition='center'
-            verticalPosition='center'
-            additionalClassName={'p-4 justify-evenly'}
+            horizontalPosition={{ sm: 'evenly' }}
+            verticalPosition={{ sm: 'center' }}
+            classNames={'p-4'}
           >
             <VerticalLayout>
               {descriptionInput?.dependencies?.map((dependency, index) => (
@@ -254,7 +250,6 @@ const DescriptionEditor = () => {
                   px={{ lg: '2' }}
                   py={{ xl: '2' }}
                 >
-                  {/* <HorizontalLayout key={`input-${dependency?.key}`} horizontalPosition='between'> */}
                   <InputsRow
                     item={dependency}
                     handleChange={handleDescriptionChange}
@@ -263,7 +258,6 @@ const DescriptionEditor = () => {
                     id={'dependencies'}
                     inputState={inputState}
                   />
-                  {/* </HorizontalLayout> */}
                 </ResponsiveGridLayout>
               ))}
             </VerticalLayout>
@@ -283,8 +277,7 @@ const DescriptionEditor = () => {
             isTextArea
             name={'functionality'}
             label={'Functionality'}
-            // id='functionality'
-            rows='15'
+            rows='5'
             value={descriptionInput?.functionality}
             onChange={e => handleDescriptionChange(e.target, 'description')}
           />

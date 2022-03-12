@@ -49,8 +49,8 @@ const SelectDropdown = ({
       {({ open }) => (
         <>
           <HorizontalLayout
-            horizontalPosition='center'
-            additionalClassName={`w-full space-x-2 p-2 ${wrapperClassNames}`}
+            horizontalPosition={{ sm: 'center' }}
+            classNames={`w-full space-x-2 p-2 ${wrapperClassNames}`}
           >
             <ConditionalRender condition={hasLabel}>
               <Listbox.Label

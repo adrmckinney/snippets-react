@@ -46,7 +46,7 @@ const SideBar = ({ sideBarWidth }) => {
         )}
         aria-current={snippet?.current ? 'page' : undefined}
       >
-        <HorizontalLayout additionalClassName={'w-full justify-between'}>
+        <HorizontalLayout horizontalPosition={{ sm: 'between' }} classNames={['w-full'].join(' ')}>
           <Button
             className='mt-0'
             onClick={() => setSnippetId(snippet?.id)}
