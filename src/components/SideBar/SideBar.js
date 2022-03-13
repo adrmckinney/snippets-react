@@ -37,8 +37,8 @@ const SideBar = ({ sideBarWidth }) => {
     return snippets?.map(snippet => (
       <VerticalLayout
         key={snippet?.id}
-        horizontalPosition='center'
-        additionalClassName={classNames(
+        horizontalPosition={{ mbl: 'center' }}
+        classNames={classNames(
           snippet?.current
             ? 'bg-indigo-800 text-white'
             : 'text-indigo-100 hover:bg-indigo-800 hover:text-white',

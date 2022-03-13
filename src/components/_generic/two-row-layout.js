@@ -29,7 +29,10 @@ const TwoRowLayout = ({
 }: Props) => {
   return (
     <>
-      <VerticalLayout additionalClassName={`overflow-hidden items-between ${wrapperClassNames}`}>
+      <VerticalLayout
+        verticalPosition={{ mbl: 'between' }}
+        classNames={`overflow-hidden ${wrapperClassNames}`}
+      >
         {/* Top Section */}
         <section
           aria-labelledby='primary-heading'

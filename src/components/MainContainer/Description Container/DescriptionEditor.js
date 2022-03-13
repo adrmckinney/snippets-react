@@ -168,10 +168,10 @@ const DescriptionEditor = () => {
               {descriptionInput?.props?.map((prop, index) => (
                 <ResponsiveGridLayout
                   key={`prop-${prop?.key}`}
-                  cols={{ lg: '' + (propFields?.length - 1) }}
-                  colGap={{ lg: '2' }}
-                  px={{ lg: '2' }}
-                  py={{ xl: '2' }}
+                  cols={{ sm: '' + (propFields?.length - 1) }}
+                  colGap={{ sm: '2' }}
+                  px={{ sm: '2' }}
+                  py={{ sm: '2' }}
                 >
                   <InputsRow
                     item={prop}
@@ -206,10 +206,10 @@ const DescriptionEditor = () => {
               {descriptionInput?.return_values?.map((value, index) => (
                 <ResponsiveGridLayout
                   key={`prop-${value?.key}`}
-                  cols={{ lg: '' + (returnValueFields?.length - 1) }}
-                  colGap={{ lg: '2' }}
-                  px={{ lg: '2' }}
-                  py={{ xl: '2' }}
+                  cols={{ sm: '' + (returnValueFields?.length - 1) }}
+                  colGap={{ sm: '2' }}
+                  px={{ sm: '2' }}
+                  py={{ sm: '2' }}
                 >
                   <InputsRow
                     item={value}
@@ -245,10 +245,10 @@ const DescriptionEditor = () => {
               {descriptionInput?.dependencies?.map((dependency, index) => (
                 <ResponsiveGridLayout
                   key={`prop-${dependency?.key}`}
-                  cols={{ lg: '' + (dependencyFields?.length - 1) }}
-                  colGap={{ lg: '2' }}
-                  px={{ lg: '2' }}
-                  py={{ xl: '2' }}
+                  cols={{ sm: '' + (dependencyFields?.length - 1) }}
+                  colGap={{ sm: '2' }}
+                  px={{ sm: '2' }}
+                  py={{ sm: '2' }}
                 >
                   <InputsRow
                     item={dependency}

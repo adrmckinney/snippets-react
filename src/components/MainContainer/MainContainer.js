@@ -51,12 +51,14 @@ const MainContainer = () => {
         condition={editorState.isCreating || editorState.isEditing}
         falseRender={
           <TwoColLayout
+            wrapperClassNames={'w-full'}
             leftColContent={<SnippetContainer />}
             rightColContent={<DescriptionContainer />}
+            rightClassNames={'h-full'}
           />
         }
       >
-        <form ref={formRef} onSubmit={handleSubmit} className='h-full'>
+        <form ref={formRef} onSubmit={handleSubmit} className='h-full w-full'>
           <TwoColLayout
             wrapperClassNames='h-full'
             rightClassNames='h-full'

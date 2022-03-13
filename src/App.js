@@ -12,7 +12,7 @@ const App = () => {
     <div className='h-full flex'>
       <SideBar sideBarWidth={'regular'} />
 
-      <VerticalLayout verticalPosition='start' additionalClassName={'h-full overflow-hidden'}>
+      <VerticalLayout verticalPosition={{ mbl: 'start' }} classNames={'h-full overflow-hidden'}>
         <Header />
         <MainContainer />
       </VerticalLayout>
