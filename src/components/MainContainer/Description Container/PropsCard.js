@@ -5,6 +5,7 @@ import Card from '../../_generic/Card/Card'
 import CardBody from '../../_generic/Card/card-body'
 import CardHeader from '../../_generic/Card/card-header'
 import DescriptionList from '../../_generic/Lists/description-list'
+import ResponsiveGridLayout from '../../_generic/responsive-grid-layout'
 
 type Props = {
   prop: Object,
@@ -39,17 +40,28 @@ const PropsCard = ({ prop }: Props) => {
   console.log('prop', prop)
   return (
     <>
-      {propData?.map((prop, idx) => (
-        <Card
-          key={`prop-${prop?.title}-${idx}`}
-          header={<CardHeader title={'Props'} subTitle={'These are props'} />}
-          body={
-            <CardBody>
-              <DescriptionList title={prop?.title} data={prop?.data} colSpan={prop?.colSpan} />
-            </CardBody>
-          }
-        />
-      ))}
+      <Card
+        header={<CardHeader title={'Props'} subTitle={'These are props'} />}
+        body={
+          <CardBody>
+            <ResponsiveGridLayout
+              as={'dl'}
+              cols={{ mbl: '1', sm: '2' }}
+              colGap={{ mbl: '8' }}
+              rowGap={{ mbl: '4' }}
+            >
+              {propData?.map((prop, idx) => (
+                <DescriptionList
+                  key={`prop-${prop?.title}-${idx}`}
+                  title={prop?.title}
+                  data={prop?.data}
+                  colSpan={prop?.colSpan}
+                />
+              ))}
+            </ResponsiveGridLayout>
+          </CardBody>
+        }
+      />
     </>
   )
 }

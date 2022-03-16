@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import ResponsiveGridLayout from '../responsive-grid-layout'
 
 type Props = {
   title: String,
