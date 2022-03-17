@@ -53,7 +53,7 @@ const SideBar = ({ sideBarWidth }) => {
             type={'button'}
             status={'icon'}
             title={snippet?.title}
-            overrideButtonStyle={{ fontSize: 14 }}
+            overrideButtonStyle={{ fontSize: '1rem' }}
           />
           <Button
             icon={'xicon'}

@@ -13,11 +13,11 @@ import ResponsiveGridLayout from '../../_generic/responsive-grid-layout'
 const propFields = [
   {
     label: 'Name',
-    name: 'prop_name',
+    name: 'name',
   },
   {
     label: 'Type',
-    name: 'prop_type',
+    name: 'type',
   },
   {
     label: 'Optional/Required',
@@ -25,7 +25,7 @@ const propFields = [
   },
   {
     label: 'Description',
-    name: 'prop_description',
+    name: 'description',
     isTextArea: true,
   },
 ]
@@ -33,15 +33,15 @@ const propFields = [
 const returnValueFields = [
   {
     label: 'Name',
-    name: 'return_name',
+    name: 'name',
   },
   {
     label: 'Type',
-    name: 'return_type',
+    name: 'type',
   },
   {
     label: 'Description',
-    name: 'return_description',
+    name: 'description',
     isTextArea: true,
   },
 ]
@@ -68,17 +68,17 @@ const DescriptionEditor = () => {
 
   const initialPropValue = {
     key: v4(),
-    prop_name: '',
-    prop_type: '',
+    name: '',
+    type: '',
     required: '',
     description: '',
   }
 
   const initialReturnValue = {
     key: v4(),
-    return_name: '',
-    return_type: '',
-    return_description: '',
+    name: '',
+    type: '',
+    description: '',
   }
 
   const initialDependencyValue = {
