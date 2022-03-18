@@ -3,16 +3,14 @@ import { useSnippetState } from '../../MainContainer/withSnippetState'
 
 const SearchStateContext = createContext()
 const InputChangeContext = createContext()
-const SearchResults = createContext()
 const RenderSearchContext = createContext()
 
 export const useSearch = () => {
   const searchState = useContext(SearchStateContext)
   const handleChange = useContext(InputChangeContext)
-  const searchResults = useContext(SearchResults)
   const renderSearchResults = useContext(RenderSearchContext)
 
-  return { searchState, handleChange, searchResults, renderSearchResults }
+  return { searchState, handleChange, renderSearchResults }
 }
 
 const initialState = {
@@ -31,35 +29,22 @@ export const withSearch =
   ({ ...rest }) => {
     const [searchState, dispatch] = useReducer(reducer, initialState)
     const { snippetsListState } = useSnippetState()
-    const searchResults = []
 
     const handleChange = (name, value) => {
-      dispatch({ name: name, value: value })
-    }
-
-    const filterSnippetsList = () => {
-      snippetsListState?.map(snippet => {
-        if (snippet?.title?.toLowerCase()?.includes(searchState.search.toLowerCase())) {
-          searchResults.push(snippet)
-        }
-      })
+      dispatch({ name, value })
     }
 
     const renderSearchResults = props => {
-      snippetsListState?.filter(filterSnippetsList)
-
-      return searchResults
+      return snippetsListState?.filter(snippet =>
+        snippet?.title?.toLowerCase()?.includes(searchState.search.toLowerCase())
+      )
     }
-    // console.log('renderSearchResults()', renderSearchResults())
-    // console.log('searchResults?.length', searchResults?.length)
 
     return (
       <InputChangeContext.Provider value={handleChange}>
         <SearchStateContext.Provider value={searchState}>
           <RenderSearchContext.Provider value={renderSearchResults}>
-            <SearchResults.Provider value={searchResults}>
-              <Component {...rest} />
-            </SearchResults.Provider>
+            <Component {...rest} />
           </RenderSearchContext.Provider>
         </SearchStateContext.Provider>
       </InputChangeContext.Provider>

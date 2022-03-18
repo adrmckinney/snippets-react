@@ -22,7 +22,7 @@ function classNames(...classes) {
 const SideBar = ({ sideBarWidth }) => {
   const { setSnippetId, snippetsListState: snippets } = useSnippetState()
   const { dispatch, editorState } = useEditorState()
-  const { searchResults, searchState, renderSearchResults } = useSearch()
+  const { searchState, renderSearchResults } = useSearch()
 
   const width = {
     skinny: '28',
@@ -30,11 +30,17 @@ const SideBar = ({ sideBarWidth }) => {
   }
 
   const handleNoResults = () => {
-    return <div>No Results Found</div>
+    return (
+      <PaddedLayout>
+        <p className='text-md text-white'>No Results Found</p>
+      </PaddedLayout>
+    )
   }
 
   const renderSnippets = useMemo(() => {
-    return snippets?.map(snippet => (
+    const snippitsList = !!searchState?.search ? renderSearchResults() : snippets
+
+    return snippitsList?.map(snippet => (
       <VerticalLayout
         key={snippet?.id}
         horizontalPosition={{ mbl: 'center' }}
@@ -70,7 +76,7 @@ const SideBar = ({ sideBarWidth }) => {
         </HorizontalLayout>
       </VerticalLayout>
     ))
-  }, [snippets, setSnippetId, dispatch])
+  }, [snippets, setSnippetId, dispatch, renderSearchResults, searchState?.search])
 
   return (
     <>
@@ -86,10 +92,8 @@ const SideBar = ({ sideBarWidth }) => {
             </PaddedLayout>
           </ConditionalRender>
           <div className='flex-1 mt-6 w-full px-2 space-y-1'>
-            {!!searchState?.search && searchResults?.length === 0 && handleNoResults()}
-            {!!searchState?.search
-              ? renderSearchResults()?.map(result => result?.title)
-              : renderSnippets}
+            {renderSearchResults()?.length === 0 ? handleNoResults() : null}
+            {renderSnippets}
           </div>
         </div>
       </div>
