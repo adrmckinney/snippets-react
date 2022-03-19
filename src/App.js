@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css'
 import MainContainer from './components/MainContainer/MainContainer'
 import { withInputChangeState } from './components/MainContainer/withInputChangeState'
@@ -11,7 +12,6 @@ const App = () => {
   return (
     <div className='h-full flex'>
       <SideBar sideBarWidth={'regular'} />
-
       <VerticalLayout verticalPosition={{ mbl: 'start' }} classNames={'h-full overflow-hidden'}>
         <Header />
         <MainContainer />

@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 import DetailInputsContainer from '../MainContainer/SnippetEditor/DetailInputsContainer'
 import Button from '../_generic/Button'

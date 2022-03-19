@@ -1,6 +1,5 @@
 import { CheckIcon, MenuAlt2Icon, PlusSmIcon, MailIcon } from '@heroicons/react/solid'
 import { MailIcon as MailOutline } from '@heroicons/react/outline'
-
 import {
   RefreshIcon,
   PencilAltIcon,
@@ -11,44 +10,9 @@ import {
   TerminalIcon,
 } from '@heroicons/react/outline'
 import { buttonTheme } from '../global-styles'
-// import { Link } from 'react-router-dom'
-
-const SIZES = {
-  extraSmall: 'px-1 py-0.5 text-xs items-center',
-  small: 'px-3 py-2 text-sm leading-4 items-center',
-  medium: 'px-4 py-2 text-base font-medium items-center',
-  large: 'px-6 py-3 text-lg font-medium items-center',
-  text: 'py-2 px-4 text-sm',
-  mobileHamburger: 'p-2',
-  null: '',
-}
-
-const LABEL_POSITION = {
-  left: 'justify-start',
-  center: 'justify-center',
-  right: 'justify-end',
-}
-
-const STATUSES = {
-  primary: `bg-${buttonTheme.primary.bgColor} hover:bg-${buttonTheme.primary.hoverBgColor} text-${buttonTheme.primary.text} border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.primary.focus}`,
-  secondary: `bg-${buttonTheme.secondary.bgColor} hover:bg-${buttonTheme.secondary.hoverBgColor} text-${buttonTheme.secondary.text} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.secondary.focus}`,
-  cancel: `bg-${buttonTheme.cancel.bgColor} hover:bg-${buttonTheme.cancel.hoverBgColor} text-${buttonTheme.cancel.text} border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${buttonTheme.cancel.focus}`,
-  CTA: 'text-snow bg-forestGreen hover:bg-russianGreen border border-transparent',
-  text: 'block text-gray-700 hover:bg-gray-100',
-  mobileHamburger:
-    'bg-mediumPurple inline-flex items-center text-indigo-200 hover:text-white hover:bg-darkerPurple hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-darkerPurple focus:ring-white',
-  icon: 'bg-transparent',
-  null: '',
-}
-
-const ICON_SIZES = {
-  extraSmall: 'h-3 w-3',
-  small: 'h-4 w-4',
-  medium: 'h-6 w-6',
-  large: 'h-8 w-8',
-}
 
 const Button = ({
+  as: CustomTag = 'button',
   type,
   title,
   size,
@@ -71,7 +35,122 @@ const Button = ({
   ref,
   onKeyPress,
 }) => {
-  const ICONS = {
+  return (
+    <CustomTag
+      type={type}
+      to={to || '/'}
+      ref={ref}
+      disabled={disabled ?? false}
+      onClick={onClick}
+      onKeyPress={onKeyPress}
+      style={overrideButtonStyle}
+      role={role}
+      aria-controls={ariaControls}
+      aria-expanded={ariaExpanded}
+      aria-haspopup={ariaHaspopup}
+      className={[
+        'inline-flex',
+        'rounded-md',
+        'shadow-sm',
+        `${SIZES[size] ?? SIZES['medium']}`,
+        `${STATUSES[status] ?? STATUSES['primary']}`,
+        `${LABEL_POSITION[labelPosition] ?? LABEL_POSITION['center']}`,
+        `${customButtonStyle}`,
+      ].join(' ')}
+    >
+      {icons({ customIconStyle, overrideIconStyle, size })[0][icon]}
+      {title}
+      {children}
+      {!!srOnly && <span className='sr-only'>{srOnly}</span>}
+    </CustomTag>
+  )
+}
+
+export default Button
+
+const SIZES = {
+  extraSmall: ['px-1', 'py-0.5', 'text-xs', 'items-center'].join(' '),
+  small: ['px-3', 'py-2', 'text-sm', 'leading-4', 'items-center'].join(' '),
+  medium: ['px-4', 'py-2', 'text-base', 'font-medium', 'items-center'].join(' '),
+  large: ['px-6', 'py-3', 'text-lg', 'font-medium', 'items-center'].join(' '),
+  text: ['py-2', 'px-4', 'text-sm'].join(' '),
+  mobileHamburger: 'p-2',
+  null: '',
+}
+
+const LABEL_POSITION = {
+  left: 'justify-start',
+  center: 'justify-center',
+  right: 'justify-end',
+}
+
+const STATUSES = {
+  primary: [
+    `text-${buttonTheme.primary.text}`,
+    `bg-${buttonTheme.primary.bgColor}`,
+    `hover:bg-${buttonTheme.primary.hoverBgColor}`,
+    'border',
+    'border-transparent',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    `focus:ring-${buttonTheme.primary.focus}`,
+  ].join(' '),
+  secondary: [
+    `text-${buttonTheme.secondary.text}`,
+    `bg-${buttonTheme.secondary.bgColor}`,
+    `hover:bg-${buttonTheme.secondary.hoverBgColor}`,
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    `focus:ring-${buttonTheme.secondary.focus}`,
+  ].join(' '),
+  cancel: [
+    `text-${buttonTheme.cancel.text}`,
+    `bg-${buttonTheme.cancel.bgColor}`,
+    `hover:bg-${buttonTheme.cancel.hoverBgColor}`,
+    'border',
+    'border-gray-300',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    `focus:ring-${buttonTheme.cancel.focus}`,
+  ].join(' '),
+  CTA: [
+    'text-snow',
+    'bg-forestGreen',
+    'hover:bg-russianGreen',
+    'border',
+    'border-transparent',
+  ].join(' '),
+  text: ['block', 'text-gray-700', 'hover:bg-gray-100'].join(' '),
+  mobileHamburger: [
+    'bg-mediumPurple',
+    'inline-flex',
+    'items-center',
+    'text-indigo-200',
+    'hover:text-white',
+    'hover:bg-darkerPurple',
+    'hover:bg-opacity-75',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    'focus:ring-offset-darkerPurple',
+    'focus:ring-white',
+  ].join(' '),
+  icon: 'bg-transparent',
+  null: '',
+}
+
+const ICON_SIZES = {
+  extraSmall: 'h-3 w-3',
+  small: 'h-4 w-4',
+  medium: 'h-6 w-6',
+  large: 'h-8 w-8',
+}
+
+const icons = ({ customIconStyle, overrideIconStyle, size }) => [
+  {
     mailOutline: (
       <MailOutline
         className={`${ICON_SIZES[size]} mr-2 self-center ${customIconStyle}`}
@@ -156,59 +235,5 @@ const Button = ({
         aria-hidden='true'
       />
     ),
-  }
-
-  //   if (type === 'link') {
-  //     return (
-  //       <Link
-  //         to={to || '/'}
-  //         disabled={disabled ?? false}
-  //         onClick={onClick}
-  //         style={overrideButtonStyle}
-  //         aria-controls={ariaControls}
-  //         aria-expanded={ariaExpanded}
-  //         aria-haspopup={ariaHaspopup}
-  //         role={role}
-  //         className={`
-  //                     inline-flex rounded-md shadow-sm
-  //                     ${SIZES[size] ?? SIZES['medium']}
-  //                     ${STATUSES[status] ?? STATUSES['primary']}
-  //                     ${LABEL_POSITION[labelPosition] ?? LABEL_POSITION['center']}
-  //                     ${customButtonStyle}
-  //                 `}
-  //       >
-  //         {ICONS[icon]}
-  //         {title}
-  //       </Link>
-  //     )
-  //   }
-
-  return (
-    <button
-      type={type}
-      ref={ref}
-      disabled={disabled ?? false}
-      onClick={onClick}
-      onKeyPress={onKeyPress}
-      style={overrideButtonStyle}
-      role={role}
-      aria-controls={ariaControls}
-      aria-expanded={ariaExpanded}
-      aria-haspopup={ariaHaspopup}
-      className={`
-            inline-flex rounded-md shadow-sm
-            ${SIZES[size] ?? SIZES['medium']} 
-            ${STATUSES[status] ?? STATUSES['primary']}
-            ${LABEL_POSITION[labelPosition] ?? LABEL_POSITION['center']}
-            ${customButtonStyle}
-        `}
-    >
-      {ICONS[icon]}
-      {title}
-      {children}
-      {!!srOnly && <span className='sr-only'>{srOnly}</span>}
-    </button>
-  )
-}
-
-export default Button
+  },
+]
